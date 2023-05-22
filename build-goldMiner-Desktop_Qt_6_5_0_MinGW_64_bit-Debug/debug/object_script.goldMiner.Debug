@@ -1,0 +1,11 @@
+debug/endgamedialog.o
+debug/gameobject.o
+debug/hook.o
+debug/level.o
+debug/main.o
+debug/startwindow.o
+debug/moc_endgamedialog.o
+debug/moc_gameobject.o
+debug/moc_hook.o
+debug/moc_level.o
+debug/moc_startwindow.o
