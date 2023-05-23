@@ -1,7 +1,6 @@
 #include "gameobject.h"
 #include "qcolor.h"
 #include "QPainter"
-#include "qdebug.h"
 
 GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_) :
     type(type_),
@@ -14,7 +13,7 @@ GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int sc
 }
 
 Gold::Gold(const QPointF& position_, int radius_):
-    GameObject(Type::Gold, position_, radius_, radius_* 50, 5-radius_*0.05)
+    GameObject(Type::Gold, position_, radius_, radius_* 50, 5 - radius_*0.05)
 {
 }
 
@@ -26,7 +25,7 @@ void Gold::draw(QPainter& painter) const
 }
 
 Stone::Stone(const QPointF& position_, int radius_):
-    GameObject(Type::Stone, position_, radius_, radius_ * 10, 5-radius_*0.09)
+    GameObject(Type::Stone, position_, radius_, radius_ * 10, 5 - radius_*0.09)
 {
 }
 

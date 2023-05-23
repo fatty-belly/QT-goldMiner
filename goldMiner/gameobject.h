@@ -20,7 +20,7 @@ public:
     QPointF position;
     int radius;
     int score;
-    double hookSpeed;
+    double hookSpeed;//抓取到物体后抓钩的速度
 };
 
 class Gold: public GameObject

@@ -23,18 +23,18 @@ Level::Level(QWidget *parent) :
     connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
     gameTimer->start(1000);
     generateRandomObjects(8,12);
-    repaint();
+    update();
 }
 
 void Level::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Down)
     {
-        hook->extend();
+        hook->extend();//按↓键伸钩子
     }
     if(event->key() == Qt::Key_Up)
     {
-        hook->bomb();
+        hook->bomb();//按↑键扔炸药
     }
 }
 
@@ -43,15 +43,15 @@ void Level::generateRandomObjects(int numStones,int numGolds)
     for(int i=1; i<=numStones; i++)
     {
         int x = QRandomGenerator::global()->bounded(0, 600);
-        int y = QRandomGenerator::global()->bounded(150, 300);
+        int y = QRandomGenerator::global()->bounded(150, 300);//石头在比较上面
         gameObjects.push_back(new Stone(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
-    }
+    }//在随机位置产生随机半径的石头
     for(int i=1; i<=numGolds; i++)
     {
         int x = QRandomGenerator::global()->bounded(0, 600);
-        int y = QRandomGenerator::global()->bounded(200, 350);
+        int y = QRandomGenerator::global()->bounded(200, 350);//金块在比较下面
         gameObjects.push_back(new Gold(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
-    }
+    }//在随机位置产生随机半径的金块
 }
 
 void Level::paintGameObjects()
@@ -68,14 +68,17 @@ void Level::drawLine()
     QPainter painter(this);
     if(hook)
         hook->drawLine(painter);
-}
+}//这个好像必须要单独出来写成一个函数我也不知道为什么
 
 void Level::drawBombImage()
 {
     QImage bombImage("../goldMiner/Images/bomb.png");
-    bombImage = bombImage.scaled(50,50);
+    bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
-    painter.drawImage(Bomb::bombImagePosition - QPoint(25,25), bombImage);
+    painter.drawImage(
+        Bomb::bombImagePosition -
+            QPoint(ui->hookLabel->width() / 4, ui->hookLabel->height() / 4),
+        bombImage); // 在特定位置画出图片
 }
 
 void Level::paintEvent(QPaintEvent* event)
