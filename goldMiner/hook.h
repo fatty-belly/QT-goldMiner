@@ -12,8 +12,13 @@ class Hook:public QObject
 public:
     Hook(Ui::Level *u, Level *l);
     void extend();
+    void bomb();
     void updateHook();
+    void drawLine(QPainter& painter) const;
     ~Hook();
+    QPointF position;
+    GameObject* caughtObject = NULL;
+
 
 private:
     Ui::Level *ui;
@@ -24,9 +29,7 @@ private:
     bool hookExtended=false;
     bool extend_direction = true;
     int startX,startY;
-    QPointF position;
-    double speed = 5;
-    GameObject* caughtObject = NULL;
+    double speed = 5; 
 };
 
 #endif // HOOK_H

@@ -23,6 +23,7 @@ public:
     QLabel *hookLabel;
     QLabel *scoreLabel;
     QLabel *timeLabel;
+    QLabel *bombNumLabel;
 
     void setupUi(QWidget *Level)
     {
@@ -44,7 +45,7 @@ public:
         hookLabel->setScaledContents(true);
         scoreLabel = new QLabel(Level);
         scoreLabel->setObjectName("scoreLabel");
-        scoreLabel->setGeometry(QRect(40, 20, 141, 51));
+        scoreLabel->setGeometry(QRect(40, 20, 151, 51));
         QPalette palette;
         QBrush brush(QColor(255, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -86,7 +87,7 @@ public:
         scoreLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
         timeLabel = new QLabel(Level);
         timeLabel->setObjectName("timeLabel");
-        timeLabel->setGeometry(QRect(530, 20, 141, 51));
+        timeLabel->setGeometry(QRect(480, 10, 161, 51));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
         palette1.setBrush(QPalette::Active, QPalette::Button, brush1);
@@ -118,6 +119,40 @@ public:
         timeLabel->setPalette(palette1);
         timeLabel->setFont(font);
         timeLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
+        bombNumLabel = new QLabel(Level);
+        bombNumLabel->setObjectName("bombNumLabel");
+        bombNumLabel->setGeometry(QRect(480, 50, 211, 51));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+#endif
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+#endif
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+#endif
+        bombNumLabel->setPalette(palette2);
+        bombNumLabel->setFont(font);
+        bombNumLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
 
         retranslateUi(Level);
 
@@ -131,6 +166,7 @@ public:
         hookLabel->setText(QString());
         scoreLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
         timeLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
+        bombNumLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
     } // retranslateUi
 
 };

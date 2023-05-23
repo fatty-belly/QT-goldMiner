@@ -2,6 +2,7 @@
 #include "qtimer.h"
 #include "QPoint"
 #include <QPainter>
+#include "bomb.h"
 
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
@@ -28,7 +29,6 @@ void Hook::updateHook()
         {
             for(GameObject* object:level->gameObjects)
             {
-                //qDebug()<<object->position;
                 if(sqrt(pow(position.x() + 50 - object->position.x(),2)
                          + pow(position.y() + 50 - object->position.y(),2)) < object->radius + 5)
                 {
@@ -54,7 +54,7 @@ void Hook::updateHook()
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
                 caughtObject = NULL;
             }
-            level->repaint();
+            level->update();
             return;
         }
         if(extend_direction)
@@ -65,7 +65,7 @@ void Hook::updateHook()
             if(caughtObject)
             {
                 caughtObject->position -= QPointF(-speed * cos(radians), speed * sin(radians));
-                level->repaint();
+                level->update();
             }
         }// 在当前位置的基础上向特定方向移动
         ui->hookLabel->move(position.x(),position.y());  // 设置新的位置
@@ -73,9 +73,9 @@ void Hook::updateHook()
     else
     {
         if(clockwise)
-            --angel;
+            angel -= 2;
         else
-            ++angel;
+            angel += 2;
         if(angel >= 180 || angel <= 0)
             clockwise = !clockwise;
         QTransform transform;
@@ -92,6 +92,27 @@ void Hook::extend()
         startY = ui->hookLabel->y();
         hookExtended = true;
     }
+}
+
+void Hook::bomb()
+{
+    if(caughtObject && Bomb::bombNum > 0)
+    {
+        Bomb::bombNum--;
+        Bomb::bombImageTime = 1;
+        Bomb::bombImagePosition = caughtObject->position;
+        level->update();
+        level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
+        caughtObject = NULL;
+        speed = 5;
+    }
+}
+
+void Hook::drawLine(QPainter& painter) const
+{
+    painter.setRenderHint(QPainter::Antialiasing); //抗锯齿
+    painter.setPen(QPen(QColor(Qt::black),2));
+    painter.drawLine(QPoint(350,50),position + QPoint(50,50));
 }
 
 Hook::~Hook()

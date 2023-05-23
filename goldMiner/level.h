@@ -26,13 +26,15 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
     void generateRandomObjects(int numStones,int numGolds);
     void paintGameObjects();
+    void drawLine();
     void paintEvent(QPaintEvent* event) override;
     void updateTimer();
+    void drawBombImage();
 
 private:
     Ui::Level *ui;
     QPixmap minerPixmap;
-    Hook* hook;
+    Hook* hook = NULL;
     int restTime;
 };
 

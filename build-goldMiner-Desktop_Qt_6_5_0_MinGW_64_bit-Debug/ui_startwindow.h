@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -24,6 +25,7 @@ class Ui_StartWindow
 public:
     QWidget *centralwidget;
     QPushButton *pushButton;
+    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -40,6 +42,11 @@ public:
         QFont font;
         font.setPointSize(20);
         pushButton->setFont(font);
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+        label->setGeometry(QRect(310, 340, 181, 101));
+        label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
         StartWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(StartWindow);
         menubar->setObjectName("menubar");
@@ -58,6 +65,7 @@ public:
     {
         StartWindow->setWindowTitle(QCoreApplication::translate("StartWindow", "MainWindow", nullptr));
         pushButton->setText(QCoreApplication::translate("StartWindow", "\345\274\200\345\247\213", nullptr));
+        label->setText(QCoreApplication::translate("StartWindow", "<html><head/><body><p>\346\214\211\342\206\223\346\224\276\351\222\251\345\255\220</p><p>\346\214\211\342\206\221\346\211\224\347\202\270\350\215\257</p></body></html>", nullptr));
     } // retranslateUi
 
 };

@@ -1,9 +1,11 @@
+debug/bomb.o
 debug/endgamedialog.o
 debug/gameobject.o
 debug/hook.o
 debug/level.o
 debug/main.o
 debug/startwindow.o
+debug/moc_bomb.o
 debug/moc_endgamedialog.o
 debug/moc_gameobject.o
 debug/moc_hook.o
