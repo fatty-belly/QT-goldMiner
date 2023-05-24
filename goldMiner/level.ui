@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 217, 140);</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="minerLabel">
    <property name="geometry">
@@ -720,6 +720,26 @@
     <string>TextLabel</string>
    </property>
   </widget>
+  <widget class="QWidget" name="backgroundWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>719</width>
+     <height>455</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(&quot;../goldMiner/Images/background.png&quot;);
+</string>
+   </property>
+  </widget>
+  <zorder>backgroundWidget</zorder>
+  <zorder>minerLabel</zorder>
+  <zorder>hookLabel</zorder>
+  <zorder>scoreLabel</zorder>
+  <zorder>timeLabel</zorder>
+  <zorder>bombNumLabel</zorder>
  </widget>
  <resources/>
  <connections/>
