@@ -13,7 +13,7 @@ Level::Level(QWidget *parent) :
     QWidget(parent),
     score(0),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
+    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     restTime(90)
 {
     ui->setupUi(this);
@@ -72,7 +72,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("../goldMiner/Images/bomb.png");
+    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(

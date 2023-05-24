@@ -22,6 +22,7 @@ public:
     std::vector<GameObject*> gameObjects;//关卡内所有现存物体
     int score;//总得分
 
+
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void generateRandomObjects(int numStones,int numGolds);//初始化随机产生物体
