@@ -1,10 +1,12 @@
 #include "gameobject.h"
 #include "qcolor.h"
 #include "QPainter"
+#include "QPixmap"
 
-GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_) :
+GameObject::GameObject(Type type_, const QPointF& position_, QPixmap objectPixmap_, int radius_, int score_,double hookSpeed_) :
     type(type_),
     position(position_),
+    objectPixmap(objectPixmap_),
     radius(radius_),
     score(score_),
     hookSpeed(hookSpeed_)
@@ -12,26 +14,32 @@ GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int sc
 
 }
 
-Gold::Gold(const QPointF& position_, int radius_):
-    GameObject(Type::Gold, position_, radius_, radius_* 50, 5 - radius_*0.05)
+BigGold::BigGold(const QPointF& position_):
+    GameObject(Type::Gold, position_, QPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/big.png"), 5, 500, 3)
 {
 }
 
-void Gold::draw(QPainter& painter) const
+SmallGold::SmallGold(const QPointF& position_):
+    GameObject(Type::Gold, position_, QPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/small.png"), 3, 200, 4)
 {
-    QColor goldColor(212,175,55);
-    painter.setBrush(goldColor);
-    painter.drawEllipse(position, radius, radius);
 }
 
-Stone::Stone(const QPointF& position_, int radius_):
-    GameObject(Type::Stone, position_, radius_, radius_ * 10, 5 - radius_*0.09)
+void BigGold::draw(QPainter& painter) const
+{
+    painter.drawPixmap(position,objectPixmap);
+}
+
+void SmallGold::draw(QPainter& painter) const
+{
+    painter.drawPixmap(position,objectPixmap);
+}
+
+Stone::Stone(const QPointF& position_):
+    GameObject(Type::Stone, position_, QPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/stone.png"), 5, 10, 1)
 {
 }
 
 void Stone::draw(QPainter& painter) const
 {
-    QColor grayColor(128,128,128);
-    painter.setBrush(grayColor);
-    painter.drawEllipse(position, radius, radius);
+       painter.drawPixmap(position,objectPixmap);
 }

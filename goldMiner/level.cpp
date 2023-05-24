@@ -44,13 +44,13 @@ void Level::generateRandomObjects(int numStones,int numGolds)
     {
         int x = QRandomGenerator::global()->bounded(0, 600);
         int y = QRandomGenerator::global()->bounded(150, 300);//石头在比较上面
-        gameObjects.push_back(new Stone(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
+        gameObjects.push_back(new Stone(QPoint(x,y)));
     }//在随机位置产生随机半径的石头
     for(int i=1; i<=numGolds; i++)
     {
         int x = QRandomGenerator::global()->bounded(0, 600);
         int y = QRandomGenerator::global()->bounded(200, 350);//金块在比较下面
-        gameObjects.push_back(new Gold(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
+        gameObjects.push_back(new SmallGold(QPoint(x,y)));
     }//在随机位置产生随机半径的金块
 }
 
