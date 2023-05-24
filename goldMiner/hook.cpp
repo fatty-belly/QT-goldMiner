@@ -7,7 +7,7 @@
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
+    hookPixmap("../goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
