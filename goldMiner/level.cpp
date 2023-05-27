@@ -47,7 +47,7 @@ Level::Level(QWidget *parent, int levelNum_) :
         goalScore = 7000;
         break;
     }
-    ui->goalScoreLabel->setText(QString("分数:%1").arg(goalScore));
+    ui->goalScoreLabel->setText(QString("目标分数:%1").arg(goalScore));
     update();
 }
 
