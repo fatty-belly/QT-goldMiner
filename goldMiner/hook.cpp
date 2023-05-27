@@ -32,8 +32,8 @@ void Hook::updateHook()
         {
             for(GameObject* object:level->gameObjects)//逐个遍历所有物体
             {
-                if(sqrt(pow(position.x() + ui->hookLabel->width() / 2 - object->position.x(),2)
-                         + pow(position.y() + ui->hookLabel->height()/2 - object->position.y(),2))
+                if(sqrt(pow(position.x() + ui->hookLabel->width() / 2 - object->position.x() , 2)
+                         + pow(position.y() + ui->hookLabel->height()/2 - object->position.y() , 2))
                     < object -> radius + 5)//判断是否碰到物体
                 {
                     caughtObject = object;

@@ -9,20 +9,45 @@
 #include <QPainter>
 #include <QTime>
 
-Level::Level(QWidget *parent) :
+int Level::totalLevelNum = 4;
+
+Level::Level(QWidget *parent, int levelNum_) :
     QWidget(parent),
     score(0),
     ui(new Ui::Level),
     minerPixmap("../goldMiner/Images/goldminer.png"),
-    restTime(90)
+    restTime(90),
+    levelNum(levelNum_)
 {
     ui->setupUi(this);
     ui->minerLabel->setPixmap(minerPixmap);
+    gameObjects.clear();
     hook = new Hook(ui, this);
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
     gameTimer->start(1000);
-    generateRandomObjects(8,12);
+    switch(levelNum)
+    {
+    case 1:
+        generateRandomObjects(8,12);//第一关-正常关
+        goalScore = 7500;
+        Bomb::bombNum = 5;
+        break;
+    case 2:
+        generateRandomObjects(10,10);//第二关-正常关
+        goalScore = 9000;
+        break;
+    case 3:
+        generateRandomObjects(25,5,true);
+        Bomb::bombNum += 5;//第三关-碎石关
+        goalScore = 6000;
+        break;
+    case 4:
+        generateSpecialObjects(5);//第四关-雪花关
+        goalScore = 7000;
+        break;
+    }
+    ui->goalScoreLabel->setText(QString("分数:%1").arg(goalScore));
     update();
 }
 
@@ -38,20 +63,94 @@ void Level::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Level::generateRandomObjects(int numStones,int numGolds)
+void Level::generateRandomObjects(int numStones,int numGolds, int special)
 {
-    for(int i=1; i<=numStones; i++)
+    while(numStones > 0 || numGolds > 0)
     {
-        int x = QRandomGenerator::global()->bounded(0, 600);
-        int y = QRandomGenerator::global()->bounded(150, 300);//石头在比较上面
-        gameObjects.push_back(new Stone(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
-    }//在随机位置产生随机半径的石头
-    for(int i=1; i<=numGolds; i++)
+        bool flag = false;
+        int x,y,radius;
+        if((!special && QRandomGenerator::global()->bounded(0, numStones + numGolds) < numStones)
+            || numGolds == 0)
+        {
+            while(!flag)
+            {
+                flag=true;
+                x = QRandomGenerator::global()->bounded(0, 600);
+                y = QRandomGenerator::global()->bounded(150, 300); // 石头在比较上面
+                radius = QRandomGenerator::global()->bounded(10, 50);
+                for(GameObject* object:gameObjects)
+                {
+                    if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < radius + object->radius)
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }//碰撞检测
+            gameObjects.push_back(new Stone(QPoint(x, y), radius));
+            numStones--;
+        }
+        else
+        {
+            while(!flag)
+            {
+                flag=true;
+                x = QRandomGenerator::global()->bounded(0, 600);
+                y = QRandomGenerator::global()->bounded(200, 350); // 金块在比较下面
+                if(special)
+                    radius = QRandomGenerator::global()->bounded(28, 33);
+                else
+                    radius = QRandomGenerator::global()->bounded(20, 40);
+                for(GameObject* object:gameObjects)
+                {
+                    if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < radius + object->radius)
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }//碰撞检测
+            gameObjects.push_back(new Gold(QPoint(x, y), radius));
+            numGolds--;
+        }
+    } // 在随机位置产生随机半径的石头与金块
+}
+
+void Level::generateSpecialObjects(int numGolds)
+{
+    for (int i = 1; i <= numGolds; i++)
     {
-        int x = QRandomGenerator::global()->bounded(0, 600);
-        int y = QRandomGenerator::global()->bounded(200, 350);//金块在比较下面
-        gameObjects.push_back(new Gold(QPoint(x,y),QRandomGenerator::global()->bounded(10, 50)));
-    }//在随机位置产生随机半径的金块
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(150, 350); // 石头在比较上面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new Gold(QPoint(x, y), radius));
+        gameObjects.push_back(new Stone(QPoint(x - 2 * radius, y), radius/2));
+        gameObjects.push_back(new Stone(QPoint(x + 2 * radius, y), radius/2));
+        gameObjects.push_back(
+            new Stone(QPoint(x - radius, y - sqrt(3) * radius), radius/2));
+        gameObjects.push_back(
+            new Stone(QPoint(x + radius, y - sqrt(3) * radius), radius/2));
+        gameObjects.push_back(
+            new Stone(QPoint(x - radius, y + sqrt(3) * radius), radius/2));
+        gameObjects.push_back(
+            new Stone(QPoint(x + radius, y + sqrt(3) * radius), radius/2));
+    } // 在随机位置产生随机半径的金块,并在周围产生石头包围
 }
 
 void Level::paintGameObjects()
@@ -103,8 +202,16 @@ void Level::updateTimer()
     if(restTime == 0)
     {
         this->close();
-        EndGameDialog *endGameDialog = new EndGameDialog(score);
-        endGameDialog->show();
+        if(score < goalScore)
+        {
+            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,false);
+            endGameDialog->show();
+        }
+        else
+        {
+            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,true);
+            endGameDialog->show();
+        }
     }
 }
 

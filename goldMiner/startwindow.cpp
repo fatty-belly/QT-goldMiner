@@ -19,7 +19,7 @@ StartWindow::~StartWindow()
 void StartWindow::on_pushButton_clicked()
 {
     close();
-    Level *level = new Level();
+    Level *level = new Level(nullptr, 1);
     level->show();
 }
 
