@@ -26,17 +26,22 @@ Level::Level(QWidget *parent, int levelNum_) :
     StrengthDownTimeDeq.clear();
     StrengthUpTimeDeq.clear();
     hook = new Hook(ui, this);
-    QTimer *gameTimer = new QTimer(this);
-    connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
-    gameTimer->start(1000);
+    if (levelNum == 1)
+    {
+        QTimer *gameTimer = new QTimer(this);
+        connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
+        gameTimer->start(1000);
+    }
     switch(levelNum)
     {
     case 1:
 //        generateProps(5);
 //        generateDiamonds(2);
-        generateRandomObjects(8,8);//第一关-正常关
+        generateRandomObjects(8,10);//第一关-正常关
         generateTNT(10);
         goalScore = 8000;
+        restTime = 30;
+        score = 100000;
         Bomb::bombNum = 5;
         break;
     case 2:
@@ -49,7 +54,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     case 3:
         generateTimePlus(2);
         generateDiamonds(20);//第三关-钻石关
-        goalScore = 36000;
+        goalScore = 40000;
         restTime = 120;
         break;
     case 4:
@@ -368,12 +373,12 @@ void Level::updateTimer()
         this->close();
         if(score < goalScore)
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(0,levelNum,false);
+            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,false);
             endGameDialog->show();
         }
         else
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,true);
+            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,true);
             endGameDialog->show();
         }
     }

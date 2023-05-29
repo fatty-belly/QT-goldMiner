@@ -19,11 +19,11 @@
      <x>40</x>
      <y>180</y>
      <width>80</width>
-     <height>18</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>购买</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
@@ -32,11 +32,11 @@
      <x>190</x>
      <y>180</y>
      <width>80</width>
-     <height>18</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>购买</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -45,11 +45,11 @@
      <x>340</x>
      <y>180</y>
      <width>80</width>
-     <height>18</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>购买</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -97,7 +97,7 @@
      <x>360</x>
      <y>20</y>
      <width>80</width>
-     <height>18</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -107,7 +107,7 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>210</x>
      <y>20</y>
      <width>91</width>
      <height>31</height>

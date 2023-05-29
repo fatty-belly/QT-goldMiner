@@ -2,6 +2,7 @@
 #define SHOP_H
 
 #include <QWidget>
+#include <level.h>
 
 namespace Ui {
 class Shop;
@@ -15,11 +16,17 @@ public:
     explicit Shop(int coin_, QWidget *parent = nullptr, int levelNum_ = 1);
     ~Shop();
     static int coin;
-    const int prop_num;
-    int num1,num2,num3;
+    int numProp,num1,num2,num3;
+    Level * level;
 
 private slots:
     void on_nextLevelButton_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::Shop *ui;

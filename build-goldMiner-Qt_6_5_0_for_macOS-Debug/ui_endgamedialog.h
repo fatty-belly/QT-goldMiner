@@ -38,7 +38,7 @@ public:
         label->setAlignment(Qt::AlignCenter);
         pushButton = new QPushButton(EndGameDialog);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(280, 250, 80, 18));
+        pushButton->setGeometry(QRect(280, 250, 80, 31));
         bombLabel = new QLabel(EndGameDialog);
         bombLabel->setObjectName("bombLabel");
         bombLabel->setGeometry(QRect(80, 199, 241, 31));

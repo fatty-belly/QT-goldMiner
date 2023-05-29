@@ -37,13 +37,13 @@ public:
         Shop->resize(467, 300);
         pushButton = new QPushButton(Shop);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(40, 180, 80, 18));
+        pushButton->setGeometry(QRect(40, 180, 80, 31));
         pushButton_2 = new QPushButton(Shop);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(190, 180, 80, 18));
+        pushButton_2->setGeometry(QRect(190, 180, 80, 31));
         pushButton_3 = new QPushButton(Shop);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(340, 180, 80, 18));
+        pushButton_3->setGeometry(QRect(340, 180, 80, 31));
         label = new QLabel(Shop);
         label->setObjectName("label");
         label->setGeometry(QRect(40, 210, 81, 51));
@@ -55,10 +55,10 @@ public:
         label_3->setGeometry(QRect(340, 210, 81, 41));
         nextLevelButton = new QPushButton(Shop);
         nextLevelButton->setObjectName("nextLevelButton");
-        nextLevelButton->setGeometry(QRect(360, 20, 80, 18));
+        nextLevelButton->setGeometry(QRect(360, 20, 80, 31));
         label_4 = new QLabel(Shop);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(190, 20, 91, 31));
+        label_4->setGeometry(QRect(210, 20, 91, 31));
         coinLabel = new QLabel(Shop);
         coinLabel->setObjectName("coinLabel");
         coinLabel->setGeometry(QRect(30, 20, 121, 31));
@@ -71,9 +71,9 @@ public:
     void retranslateUi(QWidget *Shop)
     {
         Shop->setWindowTitle(QCoreApplication::translate("Shop", "Form", nullptr));
-        pushButton->setText(QCoreApplication::translate("Shop", "PushButton", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("Shop", "PushButton", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("Shop", "PushButton", nullptr));
+        pushButton->setText(QCoreApplication::translate("Shop", "\350\264\255\344\271\260", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("Shop", "\350\264\255\344\271\260", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("Shop", "\350\264\255\344\271\260", nullptr));
         label->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
         label_2->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
         label_3->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
