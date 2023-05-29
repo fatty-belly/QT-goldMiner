@@ -13,7 +13,7 @@ class EndGameDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EndGameDialog(int score, int levelNum_, bool win_);
+    explicit EndGameDialog(int addCoin_, int levelNum_, bool win_);
     ~EndGameDialog();
 
 private slots:
@@ -23,6 +23,7 @@ private:
     Ui::EndGameDialog *ui;
     int levelNum;
     bool win;
+    int addCoin;
 };
 
 #endif // ENDGAMEDIALOG_H

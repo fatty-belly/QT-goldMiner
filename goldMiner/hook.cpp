@@ -44,7 +44,7 @@ void Hook::updateHook()
             }
         }
 
-        if (extend_direction && (position.x() < -20 || position.x() > 640 || position.y() > 380))
+        if (extend_direction && (position.x() < -30 || position.x() > 650 || position.y() > 390))
             extend_direction = false;//碰到边缘返回
 
         if(!extend_direction &&

@@ -48,7 +48,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     case 3:
         generateTimePlus(2);
         generateDiamonds(20);//第三关-钻石关
-        goalScore = 40000;
+        goalScore = 36000;
         restTime = 120;
         break;
     case 4:
@@ -344,12 +344,12 @@ void Level::updateTimer()
         this->close();
         if(score < goalScore)
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,false);
+            EndGameDialog *endGameDialog = new EndGameDialog(0,levelNum,false);
             endGameDialog->show();
         }
         else
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,true);
+            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,true);
             endGameDialog->show();
         }
     }
