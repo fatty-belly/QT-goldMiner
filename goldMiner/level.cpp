@@ -15,7 +15,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     QWidget(parent),
     score(0),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
+    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     restTime(90),
     levelNum(levelNum_)
 {
@@ -30,11 +30,13 @@ Level::Level(QWidget *parent, int levelNum_) :
     {
     case 1:
         generateRandomObjects(8,12);//第一关-正常关
+        generateBags(5);//钻石
         goalScore = 7500;
         Bomb::bombNum = 5;
         break;
     case 2:
         generateRandomObjects(10,10);//第二关-正常关
+
         goalScore = 9000;
         break;
     case 3:
@@ -153,6 +155,85 @@ void Level::generateSpecialObjects(int numGolds)
     } // 在随机位置产生随机半径的金块,并在周围产生石头包围
 }
 
+// 在随机位置产生钻石
+void Level::generateDiamonds(int numDiamonds){
+    for (int i = 0;i < numDiamonds;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(250, 350); // 钻石在比较上面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new Diamond(QPoint(x, y), radius));
+    }
+}
+
+
+void Level::generateTimePlus(int numTimePlus){
+    for (int i = 0;i < numTimePlus;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(350, 550); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new TimePlus(QPoint(x, y), radius));
+    }
+}
+
+
+void Level::generateBags(int numBags){
+    for (int i = 0;i < numBags;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(350, 550); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new Bag(QPoint(x, y), radius));
+    }
+}
+
+
 void Level::paintGameObjects()
 {
     QPainter painter(this);
@@ -171,7 +252,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("../goldMiner/Images/bomb.png");
+    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(

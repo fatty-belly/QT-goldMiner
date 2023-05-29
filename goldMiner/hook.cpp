@@ -7,7 +7,7 @@
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("../goldMiner/Images/hook.png"),
+    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -57,6 +57,11 @@ void Hook::updateHook()
             speed = 5;//重置速度
             if(caughtObject)
             {
+                // 如果抓到的是时间增加道具，就增加剩余时间
+                if (caughtObject->type == GameObject::Type::TimePlus){
+                    level->restTime += caughtObject->timeplus;
+                }
+
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
                 caughtObject = NULL;
