@@ -23,6 +23,8 @@ Level::Level(QWidget *parent, int levelNum_) :
     ui->setupUi(this);
     ui->minerLabel->setPixmap(minerPixmap);
     gameObjects.clear();
+    StrengthDownTimeDeq.clear();
+    StrengthUpTimeDeq.clear();
     hook = new Hook(ui, this);
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
@@ -30,18 +32,16 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-        generateBags(2);
+        generateProps(5);
         generateDiamonds(2);
-        generateBombPlus(1);
         generateRandomObjects(8,12);//第一关-正常关
         goalScore = 8000;
         Bomb::bombNum = 5;
         break;
     case 2:
-        generateBags(2);
-        generateDiamonds(2);
+        generateProps(5);
+        generateDiamonds(1);
         generateTimePlus(1);
-        generateBombPlus(1);
         generateRandomObjects(10,10);//第二关-正常关
         goalScore = 10000;
         break;
@@ -223,8 +223,8 @@ void Level::generateTimePlus(int numTimePlus, bool shortTime){
 }
 
 
-void Level::generateBags(int numBags){
-    for (int i = 0;i < numBags;i++){
+void Level::generateProps(int numProps){
+    for (int i = 0;i < numProps;i++){
         int x,y,radius;
         bool flag = false;
         while(!flag)
@@ -242,80 +242,21 @@ void Level::generateBags(int numBags){
                 }
             }
         }//碰撞检测
-        gameObjects.push_back(new Bag(QPoint(x, y), radius));
-    }
-}
-
-void Level::generateBombPlus(int numBombPlus){
-    for (int i = 0;i < numBombPlus;i++){
-        int x,y,radius;
-        bool flag = false;
-        while(!flag)
+        switch(QRandomGenerator::global()->bounded(0, 4))
         {
-            flag=true;
-            x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(200, 400);
-            radius = QRandomGenerator::global()->bounded(25, 35);
-            for(GameObject* object:gameObjects)
-            {
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
-                {
-                    flag = false;
-                    break;
-                }
-            }
-        }//碰撞检测
-        gameObjects.push_back(new BombPlus(QPoint(x, y), radius));
-    }
-}
-
-void Level::generateStrengups(int numStrengups){
-    for (int i = 0;i < numStrengups;i++){
-        int x,y,radius;
-        bool flag = false;
-        while(!flag)
-        {
-            flag=true;
-            x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(0, 200); // 时间道具在比较下面
-            radius = QRandomGenerator::global()->bounded(25, 35);
-            for(GameObject* object:gameObjects)
-            {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
-                {
-                    flag = false;
-                    break;
-                }
-            }
-        }//碰撞检测
-        gameObjects.push_back(new Strengup(QPoint(x, y), radius));
-    }
-}
-
-void Level::generateStrengdowns(int numStrengdowns){
-    for (int i = 0;i < numStrengdowns;i++){
-        int x,y,radius;
-        bool flag = false;
-        while(!flag)
-        {
-            flag=true;
-            x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(0, 200); // 时间道具在比较下面
-            radius = QRandomGenerator::global()->bounded(25, 35);
-            for(GameObject* object:gameObjects)
-            {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
-                {
-                    flag = false;
-                    break;
-                }
-            }
-        }//碰撞检测
-        gameObjects.push_back(new Strengdown(QPoint(x, y), radius));
+        case 0:
+            gameObjects.push_back(new Bag(QPoint(x, y), radius));
+            break;
+        case 1:
+            gameObjects.push_back(new BombPlus(QPoint(x, y), radius));
+            break;
+        case 2:
+            gameObjects.push_back(new StrengthUp(QPoint(x, y), radius));
+            break;
+        case 3:
+            gameObjects.push_back(new StrengthDown(QPoint(x, y), radius));
+            break;
+        }
     }
 }
 
@@ -362,29 +303,36 @@ void Level::updateTimer()
 {
     restTime--;
     std::deque<int>::iterator i;
-    if (!StrengupTimeDeq.empty()){
-        for(i=StrengupTimeDeq.begin();i != StrengupTimeDeq.end();i++){
+    if (!StrengthUpTimeDeq.empty())
+    {
+        for(i=StrengthUpTimeDeq.begin();i != StrengthUpTimeDeq.end();i++)
+        {
             (*i)--;
-            qDebug() << *i;
-            if (*i == 0){
-                hook->multiplier /= 2;
+            //qDebug() << *i;
+            if ((*i) == 0){
+                hook->multiplier /= 1.5;
             }
         }
-        while (StrengupTimeDeq[0] == 0){
-            StrengupTimeDeq.pop_front();
-        }
+        /*while (StrengthUpTimeDeq[0] == 0)
+        {
+            StrengthUpTimeDeq.pop_front();
+        }*/
     }
-    if (!StrengdownTimeDeq.empty()){
-        for(i=StrengdownTimeDeq.begin();i != StrengdownTimeDeq.end();i++){
+    if (!StrengthDownTimeDeq.empty())
+    {
+        for(i=StrengthDownTimeDeq.begin();i != StrengthDownTimeDeq.end();i++)
+        {
             (*i)--;
-            qDebug() << *i;
-            if (*i == 0){
-                hook->multiplier *= 2;
+            //qDebug() << *i;
+            if ((*i) == 0)
+            {
+                hook->multiplier *= 1.5;
             }
         }
-        while (StrengdownTimeDeq[0] == 0){
-            StrengdownTimeDeq.pop_front();
-        }
+        /*while (StrengthDownTimeDeq[0] == 0)
+        {
+            StrengthDownTimeDeq.pop_front();
+        }*/
     }
     if(Bomb::bombImageTime > 0)
         Bomb::bombImageTime--;
@@ -405,7 +353,6 @@ void Level::updateTimer()
             endGameDialog->show();
         }
     }
-
 }
 
 Level::~Level()

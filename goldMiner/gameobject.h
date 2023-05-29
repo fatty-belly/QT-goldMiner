@@ -16,8 +16,8 @@ public:
         TimePlus,
         Bag,
         BombPlus,
-        Strengup,
-        Strengdown,
+        StrengthUp,
+        StrengthDown,
         // 其他物体类型
     };
     GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_,int timeplus_=0, int bombplus_=0);
@@ -70,15 +70,15 @@ public:
     void draw(QPainter& painter) const override;
 };
 
-class Strengup: public GameObject{
+class StrengthUp: public GameObject{
 public:
-    Strengup(const QPointF& position_, int radius_);
+    StrengthUp(const QPointF& position_, int radius_);
     void draw(QPainter& painter) const override;
 };
 
-class Strengdown: public GameObject{
+class StrengthDown: public GameObject{
 public:
-    Strengdown(const QPointF& position_, int radius_);
+    StrengthDown(const QPointF& position_, int radius_);
     void draw(QPainter& painter) const override;
 };
 

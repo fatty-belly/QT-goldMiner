@@ -61,16 +61,16 @@ void Hook::updateHook()
                 Bomb::bombNum += caughtObject->bombplus;
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
-                if (caughtObject->type == GameObject::Type::Strengup){
+                if (caughtObject->type == GameObject::Type::StrengthUp){
                     //增加文字说明strength up
-                    multiplier *= 2;
-                    level->StrengupTimeDeq.push_back(10);
+                    multiplier *= 1.5;
+                    level->StrengthUpTimeDeq.push_back(20);
                 }
 
-                if (caughtObject->type == GameObject::Type::Strengdown){
+                if (caughtObject->type == GameObject::Type::StrengthDown){
                     //增加文字说明strength down
-                    multiplier /= 2;
-                    level->StrengdownTimeDeq.push_back(10);
+                    multiplier /= 1.5;
+                    level->StrengthDownTimeDeq.push_back(20);
                 }
                 caughtObject = NULL;
             }//如果抓到了物体，就得分并删除物体

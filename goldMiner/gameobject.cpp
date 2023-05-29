@@ -113,24 +113,24 @@ void Bag::draw(QPainter &painter) const{
 }
 
 
-Strengup::Strengup(const QPointF &position_, int radius_):
-    GameObject(Type::Strengup,position_,radius_,0,5 + radius_ * 0.09)
+StrengthUp::StrengthUp(const QPointF &position_, int radius_):
+    GameObject(Type::StrengthUp,position_,radius_,0,5)
 {
 }
 
-void Strengup::draw(QPainter &painter) const{
-    QImage goldImage("D:/courses/c++/QT-goldMiner/goldMiner/Images/+.png");
+void StrengthUp::draw(QPainter &painter) const{
+    QImage goldImage("../goldMiner/Images/+.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
 
-Strengdown::Strengdown(const QPointF &position_, int radius_):
-    GameObject(Type::Strengdown,position_,radius_,0,5 + radius_ * 0.09)
+StrengthDown::StrengthDown(const QPointF &position_, int radius_):
+    GameObject(Type::StrengthDown,position_,radius_,0,5)
 {
 }
 
-void Strengdown::draw(QPainter &painter) const{
-    QImage goldImage("D:/courses/c++/QT-goldMiner/goldMiner/Images/-.png");
+void StrengthDown::draw(QPainter &painter) const{
+    QImage goldImage("../goldMiner/Images/-.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
