@@ -15,6 +15,7 @@ SOURCES += \
     hook.cpp \
     level.cpp \
     main.cpp \
+    shop.cpp \
     startwindow.cpp
 
 HEADERS += \
@@ -23,11 +24,13 @@ HEADERS += \
     gameobject.h \
     hook.h \
     level.h \
+    shop.h \
     startwindow.h
 
 FORMS += \
     endgamedialog.ui \
     level.ui \
+    shop.ui \
     startwindow.ui
 
 # Default rules for deployment.
