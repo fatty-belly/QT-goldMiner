@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <gameobject.h>
 #include <vector>
+#include <deque>
 
 namespace Ui {
 class Level;
@@ -24,6 +25,7 @@ public:
     static int totalLevelNum;//总共关卡的数量
     void updateTimer();//倒计时
     int restTime;//剩余时间
+    std::deque<int> StrengupTimeDeq,StrengdownTimeDeq;
 
 
 protected:
@@ -34,6 +36,8 @@ protected:
     void generateTimePlus(int numTimePlus, bool shortTime = false);//产生时间增加道具
     void generateBags(int numBags);
     void generateBombPlus(int numBombPlus);
+    void generateStrengups(int numStrengups);
+    void generateStrengdowns(int numStrengdowns);
     void paintGameObjects();//打印物体
     void drawLine();//画出连接钩子的线
     void paintEvent(QPaintEvent* event) override;//打印关卡所有东西

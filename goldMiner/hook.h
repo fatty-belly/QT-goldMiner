@@ -18,6 +18,8 @@ public:
     ~Hook();
     QPointF position;//钩子现在的位置
     GameObject* caughtObject = NULL;//钩子抓取到的物体
+    GameObject* caughtObject = NULL;//钩子抓取到的物体
+    double multiplier = 1;
 
 
 private:
