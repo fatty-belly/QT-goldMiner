@@ -66,31 +66,7 @@ void Hook::updateHook()
             speed = 5;//重置速度
             if(caughtObject)
             {
-                // 如果抓到的是时间增加道具，就增加剩余时间
-                if (caughtObject->type == GameObject::Type::TimePlus){
-                    level->restTime += caughtObject->timeplus;
-                }
-                // 如果抓到的是神秘背包，就随机选一个道具抓上来
-                else if (caughtObject->type == GameObject::Type::Bag){
-
-                    // 产生随机数
-                    random_device rd;
-                    mt19937 gen(rd());
-
-                    uniform_int_distribution<int> dis(2,3);
-                    int randomnumber = dis(gen);
-
-                    // 神秘背包里随机生成一个道具
-                    if (randomnumber == 2){
-                        ui->text->setText("获得700金币！");
-                        caughtObject->score = 700;
-                    }
-                    else if (randomnumber == 3){
-                        ui->text->setText("时间增加10s！");
-                        level->restTime += 10;
-                    }
-
-                }
+                level->restTime += caughtObject->timeplus;
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
                 caughtObject = NULL;

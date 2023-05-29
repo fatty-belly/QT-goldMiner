@@ -1,6 +1,8 @@
 #include "gameobject.h"
 #include "qcolor.h"
 #include "QPainter"
+#include <random>
+using namespace std;
 
 GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_, int timeplus_ = 0) :
     type(type_),
@@ -64,6 +66,32 @@ void TimePlus::draw(QPainter &painter) const{
 Bag::Bag(const QPointF &position_, int radius_):
     GameObject(Type::Bag,position_,radius_,0,5 + radius_ * 0.09)
 {
+    random_device rd;
+    mt19937 gen(rd());
+
+    // 创建随机数分布
+    uniform_int_distribution<int> dis(0, 2);
+
+    // 生成随机数
+    int randomNum = dis(gen);
+
+    if (randomNum == 0){
+        type = Gold;
+        score = radius_* 50;
+        hookSpeed = 5 - radius_*0.05;
+    }
+    else if (randomNum == 1)
+    {
+        type = Stone;
+        score = radius_ * 10;
+        hookSpeed = 5 - radius_*0.09;
+    }
+    else if (randomNum == 2){
+        type = TimePlus;
+        score = 0;
+        hookSpeed = 5 + radius_ * 0.09;
+        timeplus = 10;
+    }
 }
 
 void Bag::draw(QPainter &painter) const{

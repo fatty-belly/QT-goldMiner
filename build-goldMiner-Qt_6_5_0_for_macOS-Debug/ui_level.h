@@ -26,7 +26,6 @@ public:
     QWidget *backgroundWidget;
     QLabel *scoreLabel;
     QLabel *goalScoreLabel;
-    QLabel *text;
 
     void setupUi(QWidget *Level)
     {
@@ -121,7 +120,8 @@ public:
 #endif
         bombNumLabel->setPalette(palette1);
         bombNumLabel->setFont(font);
-        bombNumLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
+        bombNumLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+""));
         backgroundWidget = new QWidget(Level);
         backgroundWidget->setObjectName("backgroundWidget");
         backgroundWidget->setGeometry(QRect(0, 0, 719, 455));
@@ -195,40 +195,6 @@ public:
         goalScoreLabel->setPalette(palette3);
         goalScoreLabel->setFont(font);
         goalScoreLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
-        text = new QLabel(backgroundWidget);
-        text->setObjectName("text");
-        text->setGeometry(QRect(180, 30, 201, 51));
-        QPalette palette4;
-        palette4.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        palette4.setBrush(QPalette::Active, QPalette::Button, brush1);
-        palette4.setBrush(QPalette::Active, QPalette::Text, brush);
-        palette4.setBrush(QPalette::Active, QPalette::ButtonText, brush);
-        palette4.setBrush(QPalette::Active, QPalette::Base, brush1);
-        palette4.setBrush(QPalette::Active, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette4.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
-#endif
-        palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette4.setBrush(QPalette::Inactive, QPalette::Button, brush1);
-        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush);
-        palette4.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
-        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush1);
-        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette4.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
-#endif
-        palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
-        palette4.setBrush(QPalette::Disabled, QPalette::Button, brush1);
-        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush);
-        palette4.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
-        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush1);
-        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette4.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
-#endif
-        text->setPalette(palette4);
-        text->setFont(font);
-        text->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
         backgroundWidget->raise();
         minerLabel->raise();
         hookLabel->raise();
@@ -249,7 +215,6 @@ public:
         bombNumLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
         scoreLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
         goalScoreLabel->setText(QCoreApplication::translate("Level", "TextLabel", nullptr));
-        text->setText(QString());
     } // retranslateUi
 
 };

@@ -29,8 +29,8 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-        generateRandomObjects(8,12);//第一关-正常关
-        generateBags(5);//钻石
+//        generateRandomObjects(8,12);//第一关-正常关
+        generateBags(5);//神秘背包
         goalScore = 7500;
         Bomb::bombNum = 5;
         break;
@@ -216,7 +216,7 @@ void Level::generateBags(int numBags){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(350, 550); // 时间道具在比较下面
+            y = QRandomGenerator::global()->bounded(0, 300); // 时间道具在比较下面
             radius = QRandomGenerator::global()->bounded(25, 35);
             for(GameObject* object:gameObjects)
             {
