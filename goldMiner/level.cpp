@@ -8,6 +8,7 @@
 #include <QRandomGenerator>
 #include <QPainter>
 #include <QTime>
+#include <deque>
 
 int Level::totalLevelNum = 6;
 
@@ -268,6 +269,55 @@ void Level::generateBombPlus(int numBombPlus){
     }
 }
 
+void Level::generateStrengups(int numStrengups){
+    for (int i = 0;i < numStrengups;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(0, 200); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new Strengup(QPoint(x, y), radius));
+    }
+}
+
+void Level::generateStrengdowns(int numStrengdowns){
+    for (int i = 0;i < numStrengdowns;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(0, 200); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new Strengdown(QPoint(x, y), radius));
+    }
+}
 
 void Level::paintGameObjects()
 {
@@ -311,6 +361,31 @@ void Level::paintEvent(QPaintEvent* event)
 void Level::updateTimer()
 {
     restTime--;
+    std::deque<int>::iterator i;
+    if (!StrengupTimeDeq.empty()){
+        for(i=StrengupTimeDeq.begin();i != StrengupTimeDeq.end();i++){
+            (*i)--;
+            qDebug() << *i;
+            if (*i == 0){
+                hook->multiplier /= 2;
+            }
+        }
+        while (StrengupTimeDeq[0] == 0){
+            StrengupTimeDeq.pop_front();
+        }
+    }
+    if (!StrengdownTimeDeq.empty()){
+        for(i=StrengdownTimeDeq.begin();i != StrengdownTimeDeq.end();i++){
+            (*i)--;
+            qDebug() << *i;
+            if (*i == 0){
+                hook->multiplier *= 2;
+            }
+        }
+        while (StrengdownTimeDeq[0] == 0){
+            StrengdownTimeDeq.pop_front();
+        }
+    }
     if(Bomb::bombImageTime > 0)
         Bomb::bombImageTime--;
     ui->timeLabel->setText(QString("剩余时间:%1s").arg(restTime));

@@ -61,6 +61,17 @@ void Hook::updateHook()
                 Bomb::bombNum += caughtObject->bombplus;
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
+                if (caughtObject->type == GameObject::Type::Strengup){
+                    //增加文字说明strength up
+                    multiplier *= 2;
+                    level->StrengupTimeDeq.push_back(10);
+                }
+
+                if (caughtObject->type == GameObject::Type::Strengdown){
+                    //增加文字说明strength down
+                    multiplier /= 2;
+                    level->StrengdownTimeDeq.push_back(10);
+                }
                 caughtObject = NULL;
             }//如果抓到了物体，就得分并删除物体
             level->update();//更新画面
@@ -68,13 +79,13 @@ void Hook::updateHook()
         }
 
         if(extend_direction)
-            position += QPointF(-speed * cos(radians), speed * sin(radians));
+            position += QPointF(-speed * multiplier * cos(radians), speed * multiplier * sin(radians));
         else
         {
-            position -= QPointF(-speed * cos(radians), speed * sin(radians));
+            position -= QPointF(-speed * multiplier * cos(radians), speed * multiplier * sin(radians));
             if(caughtObject)
             {
-                caughtObject->position -= QPointF(-speed * cos(radians), speed * sin(radians));
+                caughtObject->position -= QPointF(-speed * multiplier * cos(radians), speed * multiplier * sin(radians));
                 level->update();
             }//物体要随着抓钩移动
         }// 在当前位置的基础上向特定方向移动
@@ -128,4 +139,3 @@ Hook::~Hook()
 {
     delete ui;
 }
-
