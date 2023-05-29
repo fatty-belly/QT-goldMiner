@@ -17,7 +17,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
+    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
@@ -32,9 +32,10 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-        generateProps(5);
-        generateDiamonds(2);
-        generateRandomObjects(8,12);//第一关-正常关
+//        generateProps(5);
+//        generateDiamonds(2);
+        generateRandomObjects(8,8);//第一关-正常关
+        generateTNT(10);
         goalScore = 8000;
         Bomb::bombNum = 5;
         break;
@@ -260,6 +261,29 @@ void Level::generateProps(int numProps){
     }
 }
 
+void Level::generateTNT(int numTNTs){
+    for (int i = 0;i < numTNTs;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(200, 400); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(15, 20);
+            for(GameObject* object:gameObjects)
+            {
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new TNT(QPoint(x, y), radius));
+    }
+}
+
 void Level::paintGameObjects()
 {
     QPainter painter(this);
@@ -278,7 +302,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("../goldMiner/Images/bomb.png");
+    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(

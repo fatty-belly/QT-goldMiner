@@ -18,6 +18,7 @@ public:
         BombPlus,
         StrengthUp,
         StrengthDown,
+        TNT,
         // 其他物体类型
     };
     GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_,int timeplus_=0, int bombplus_=0);
@@ -82,4 +83,10 @@ public:
     void draw(QPainter& painter) const override;
 };
 
+
+class TNT: public GameObject{
+public:
+    TNT(const QPointF& position_, int radius_);
+    void draw(QPainter& painter) const override;
+};
 #endif // GAMEOBJECT_H

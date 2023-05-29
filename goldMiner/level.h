@@ -34,6 +34,7 @@ protected:
     void generateSpecialObjects(int numGolds);//产生金块和石头组成雪花的物体
     void generateDiamonds(int numDiamonds);//产生钻石
     void generateTimePlus(int numTimePlus, bool shortTime = false);//产生时间增加道具
+    void generateTNT(int numTNTs);
     void generateProps(int numProps);
     void paintGameObjects();//打印物体
     void drawLine();//画出连接钩子的线

@@ -120,8 +120,7 @@ public:
 #endif
         bombNumLabel->setPalette(palette1);
         bombNumLabel->setFont(font);
-        bombNumLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
-""));
+        bombNumLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
         backgroundWidget = new QWidget(Level);
         backgroundWidget->setObjectName("backgroundWidget");
         backgroundWidget->setGeometry(QRect(0, 0, 719, 455));

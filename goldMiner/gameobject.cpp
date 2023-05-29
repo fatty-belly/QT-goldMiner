@@ -21,7 +21,7 @@ Gold::Gold(const QPointF& position_, int radius_):
 
 void Gold::draw(QPainter& painter) const
 {
-    QImage goldImage("../goldMiner/Images/gold.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/gold.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
@@ -33,7 +33,7 @@ Stone::Stone(const QPointF& position_, int radius_):
 
 void Stone::draw(QPainter& painter) const
 {
-    QImage goldImage("../goldMiner/Images/stone.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/stone.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
@@ -45,7 +45,7 @@ Diamond::Diamond(const QPointF &position_, int radius_):
 }
 
 void Diamond::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/diamond.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/diamond.png");
     goldImage = goldImage.scaled(2*radius, 2*radius);
     painter.drawImage(position - QPointF(radius,radius),goldImage);
 }
@@ -58,7 +58,7 @@ TimePlus::TimePlus(const QPointF &position_, int radius_, bool shortTime):
 }
 
 void TimePlus::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/time.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position - QPointF(radius,radius),goldImage);
 }
@@ -69,7 +69,7 @@ BombPlus::BombPlus(const QPointF &position_, int radius_):
 }
 
 void BombPlus::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/realBomb.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png");
     goldImage = goldImage.scaled(2*radius,2.4*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
@@ -107,7 +107,7 @@ Bag::Bag(const QPointF &position_, int radius_):
 }
 
 void Bag::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/bag.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
@@ -119,7 +119,7 @@ StrengthUp::StrengthUp(const QPointF &position_, int radius_):
 }
 
 void StrengthUp::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/+.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
@@ -130,7 +130,18 @@ StrengthDown::StrengthDown(const QPointF &position_, int radius_):
 }
 
 void StrengthDown::draw(QPainter &painter) const{
-    QImage goldImage("../goldMiner/Images/-.png");
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/-.png");
+    goldImage = goldImage.scaled(2*radius,2*radius);
+    painter.drawImage(position-QPointF(radius,radius),goldImage);
+}
+
+TNT::TNT(const QPointF &position_, int radius_):
+    GameObject(Type::TNT,position_,radius_,0,5)
+{
+}
+
+void TNT::draw(QPainter &painter) const{
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/realbomb.png");
     goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }

@@ -7,7 +7,7 @@
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("../goldMiner/Images/hook.png"),
+    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -39,6 +39,27 @@ void Hook::updateHook()
                     caughtObject = object;
                     extend_direction = false;//往回收
                     speed = caughtObject->hookSpeed;//抓取物体后速度变化了
+
+                    // 钩到TNT
+                    if (caughtObject->type == GameObject::Type::TNT){
+
+                        for(GameObject* vanishobject:level->gameObjects)//逐个遍历所有物体
+                        {
+                            if (pow(vanishobject->position.x() - caughtObject->position.x(),2) +
+                                    pow(vanishobject->position.y() - caughtObject->position.y(), 2) <= 10000){
+                                if (vanishobject != caughtObject){
+                                    level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),vanishobject));
+                                }
+
+                            }
+                        }
+                        Bomb::bombImageTime = 2;
+                        Bomb::bombImagePosition = caughtObject->position;//炸弹位置是抓取的物体的位置
+                        level->update();
+                        level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
+                        caughtObject =  NULL;
+                        speed = 5;//以上为把物体删除的操作
+                    }
                     break;
                 }
             }
@@ -60,6 +81,8 @@ void Hook::updateHook()
                 level->restTime += caughtObject->timeplus;
                 Bomb::bombNum += caughtObject->bombplus;
                 level->score += caughtObject->score;
+
+                // 大力药水
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
                 if (caughtObject->type == GameObject::Type::StrengthUp){
                     //增加文字说明strength up
@@ -67,11 +90,13 @@ void Hook::updateHook()
                     level->StrengthUpTimeDeq.push_back(20);
                 }
 
+                // 减弱药水
                 if (caughtObject->type == GameObject::Type::StrengthDown){
                     //增加文字说明strength down
                     multiplier /= 1.5;
                     level->StrengthDownTimeDeq.push_back(20);
                 }
+
                 caughtObject = NULL;
             }//如果抓到了物体，就得分并删除物体
             level->update();//更新画面
