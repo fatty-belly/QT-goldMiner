@@ -24,7 +24,7 @@ EndGameDialog::EndGameDialog(int score, int levelNum_, bool win_) :
         ui->pushButton->setText("结束游戏");
     }
 
-    if(win && levelNum == 2)
+    if(win && levelNum == 3)
     {
         ui->bombLabel->setText("你获得了5个炸药补给:)");
     }

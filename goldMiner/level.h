@@ -31,9 +31,9 @@ protected:
     void generateRandomObjects(int numStones,int numGolds,int special = false);//初始化随机产生物体
     void generateSpecialObjects(int numGolds);//产生金块和石头组成雪花的物体
     void generateDiamonds(int numDiamonds);//产生钻石
-    void generateTimePlus(int numTimePlus);//产生时间增加道具
-    void generateBags(int numBags);//产生神秘背包
-    void generateBombPlus(int numBombPlus);//产生炸弹
+    void generateTimePlus(int numTimePlus, bool shortTime = false);//产生时间增加道具
+    void generateBags(int numBags);
+    void generateBombPlus(int numBombPlus);
     void paintGameObjects();//打印物体
     void drawLine();//画出连接钩子的线
     void paintEvent(QPaintEvent* event) override;//打印关卡所有东西

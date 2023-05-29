@@ -494,8 +494,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 0, 0);
-</string>
+    <string notr="true">color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -511,7 +510,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">#backgroundWidget{background-image: url(&quot;/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/background.png&quot;);}
+    <string notr="true">#backgroundWidget{background-image: url(&quot;../goldMiner/Images/background.png&quot;);}
 </string>
    </property>
    <widget class="QLabel" name="scoreLabel">

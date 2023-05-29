@@ -9,14 +9,14 @@
 #include <QPainter>
 #include <QTime>
 
-int Level::totalLevelNum = 4;
+int Level::totalLevelNum = 6;
 
 Level::Level(QWidget *parent, int levelNum_) :
     QWidget(parent),
     score(0),
-    ui(new Ui::Level),
-    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     restTime(90),
+    ui(new Ui::Level),
+    minerPixmap("../goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
@@ -29,24 +29,42 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-//        generateRandomObjects(8,12);//第一关-正常关
-        generateBombPlus(10);//神秘背包
-        goalScore = 7500;
+        generateBags(2);
+        generateDiamonds(2);
+        generateBombPlus(1);
+        generateRandomObjects(8,12);//第一关-正常关
+        goalScore = 8000;
         Bomb::bombNum = 5;
         break;
     case 2:
+        generateBags(2);
+        generateDiamonds(2);
+        generateTimePlus(1);
+        generateBombPlus(1);
         generateRandomObjects(10,10);//第二关-正常关
-
-        goalScore = 9000;
+        goalScore = 10000;
         break;
     case 3:
-        generateRandomObjects(25,5,true);
-        Bomb::bombNum += 5;//第三关-碎石关
-        goalScore = 6000;
+        generateTimePlus(2);
+        generateDiamonds(20);//第三关-钻石关
+        goalScore = 40000;
+        restTime = 120;
         break;
     case 4:
-        generateSpecialObjects(5);//第四关-雪花关
+        generateTimePlus(2);
+        generateRandomObjects(25,5,true);
+        Bomb::bombNum += 5;//第四关-碎石关
+        goalScore = 6000;
+        break;
+    case 5:
+        generateTimePlus(2);
+        generateSpecialObjects(5);//第五关-雪花关
         goalScore = 7000;
+        break;
+    case 6:
+        generateTimePlus(20, true);//第六关-时钟关
+        goalScore = 18;
+        restTime = 20;
         break;
     }
     ui->goalScoreLabel->setText(QString("目标分数:%1").arg(goalScore));
@@ -78,7 +96,7 @@ void Level::generateRandomObjects(int numStones,int numGolds, int special)
             {
                 flag=true;
                 x = QRandomGenerator::global()->bounded(0, 600);
-                y = QRandomGenerator::global()->bounded(150, 300); // 石头在比较上面
+                y = QRandomGenerator::global()->bounded(120, 350); // 石头在比较上面
                 radius = QRandomGenerator::global()->bounded(10, 50);
                 for(GameObject* object:gameObjects)
                 {
@@ -98,7 +116,7 @@ void Level::generateRandomObjects(int numStones,int numGolds, int special)
             {
                 flag=true;
                 x = QRandomGenerator::global()->bounded(0, 600);
-                y = QRandomGenerator::global()->bounded(200, 350); // 金块在比较下面
+                y = QRandomGenerator::global()->bounded(200, 400); // 金块在比较下面
                 if(special)
                     radius = QRandomGenerator::global()->bounded(28, 33);
                 else
@@ -128,7 +146,7 @@ void Level::generateSpecialObjects(int numGolds)
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(150, 350); // 石头在比较上面
+            y = QRandomGenerator::global()->bounded(150, 350);
             radius = QRandomGenerator::global()->bounded(25, 35);
             for(GameObject* object:gameObjects)
             {
@@ -164,13 +182,11 @@ void Level::generateDiamonds(int numDiamonds){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(250, 350); // 钻石在比较上面
-            radius = QRandomGenerator::global()->bounded(25, 35);
+            y = QRandomGenerator::global()->bounded(120, 300); // 钻石在比较上面
+            radius = QRandomGenerator::global()->bounded(10, 12);
             for(GameObject* object:gameObjects)
             {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
                 {
                     flag = false;
                     break;
@@ -182,7 +198,7 @@ void Level::generateDiamonds(int numDiamonds){
 }
 
 
-void Level::generateTimePlus(int numTimePlus){
+void Level::generateTimePlus(int numTimePlus, bool shortTime){
     for (int i = 0;i < numTimePlus;i++){
         int x,y,radius;
         bool flag = false;
@@ -190,20 +206,18 @@ void Level::generateTimePlus(int numTimePlus){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(350, 550); // 时间道具在比较下面
-            radius = QRandomGenerator::global()->bounded(25, 35);
+            y = QRandomGenerator::global()->bounded(200, 400); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(15, 20);
             for(GameObject* object:gameObjects)
             {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
                 {
                     flag = false;
                     break;
                 }
             }
         }//碰撞检测
-        gameObjects.push_back(new TimePlus(QPoint(x, y), radius));
+        gameObjects.push_back(new TimePlus(QPoint(x, y), radius, shortTime));
     }
 }
 
@@ -216,13 +230,11 @@ void Level::generateBags(int numBags){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(0, 300); // 时间道具在比较下面
+            y = QRandomGenerator::global()->bounded(120, 400);
             radius = QRandomGenerator::global()->bounded(25, 35);
             for(GameObject* object:gameObjects)
             {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
                 {
                     flag = false;
                     break;
@@ -233,8 +245,6 @@ void Level::generateBags(int numBags){
     }
 }
 
-
-
 void Level::generateBombPlus(int numBombPlus){
     for (int i = 0;i < numBombPlus;i++){
         int x,y,radius;
@@ -243,13 +253,11 @@ void Level::generateBombPlus(int numBombPlus){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(0, 300); // 时间道具在比较下面
+            y = QRandomGenerator::global()->bounded(200, 400);
             radius = QRandomGenerator::global()->bounded(25, 35);
             for(GameObject* object:gameObjects)
             {
-                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
-                    continue;
-                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < (radius + object->radius))
                 {
                     flag = false;
                     break;
@@ -259,7 +267,6 @@ void Level::generateBombPlus(int numBombPlus){
         gameObjects.push_back(new BombPlus(QPoint(x, y), radius));
     }
 }
-
 
 
 void Level::paintGameObjects()
@@ -280,7 +287,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
+    QImage bombImage("../goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -308,8 +315,9 @@ void Level::updateTimer()
         Bomb::bombImageTime--;
     ui->timeLabel->setText(QString("剩余时间:%1s").arg(restTime));
     update();
-    if(restTime == 0)
+    if(restTime == 0 || (gameObjects.size() == 0 && restTime > 0))
     {
+        restTime = -1;
         this->close();
         if(score < goalScore)
         {
@@ -322,6 +330,7 @@ void Level::updateTimer()
             endGameDialog->show();
         }
     }
+
 }
 
 Level::~Level()

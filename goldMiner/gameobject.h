@@ -15,18 +15,18 @@ public:
         Diamond,
         TimePlus,
         Bag,
-        BombPlus,
+        BombPlus
         // 其他物体类型
     };
-    GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_,int timeplus_, int bombplus_);
+    GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_,int timeplus_=0, int bombplus_=0);
     virtual void draw(QPainter& painter) const = 0;
     Type type;
     QPointF position;
     int radius;
     int score;
     double hookSpeed;//抓取到物体后抓钩的速度
-    int timeplus;
-    int bombplus;
+    int timeplus = 0;
+    int bombplus = 0;
 };
 
 class Gold: public GameObject
@@ -51,7 +51,7 @@ public:
 
 class TimePlus: public GameObject{
 public:
-    TimePlus(const QPointF& position_, int radius_);
+    TimePlus(const QPointF& position_, int radius_, bool shortTime);
     void draw(QPainter& painter) const override;
 };
 
@@ -67,5 +67,4 @@ public:
     BombPlus(const QPointF& position_, int radius_);
     void draw(QPainter& painter) const override;
 };
-
 #endif // GAMEOBJECT_H

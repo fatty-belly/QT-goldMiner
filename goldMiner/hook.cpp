@@ -3,20 +3,11 @@
 #include "QPoint"
 #include <QPainter>
 #include "bomb.h"
-#include <random>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsTextItem>
-#include <QTimer>
-#include <QMainWindow>
-#include <QLabel>
-#include <QVBoxLayout>
-using namespace std;
 
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
+    hookPixmap("../goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -66,8 +57,8 @@ void Hook::updateHook()
             speed = 5;//重置速度
             if(caughtObject)
             {
-                Bomb::bombNum += caughtObject->bombplus;
                 level->restTime += caughtObject->timeplus;
+                Bomb::bombNum += caughtObject->bombplus;
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
                 caughtObject = NULL;
