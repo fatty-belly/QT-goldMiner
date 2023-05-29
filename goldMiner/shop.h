@@ -15,6 +15,7 @@ public:
     explicit Shop(int coin_, QWidget *parent = nullptr, int levelNum_ = 1);
     ~Shop();
     static int coin;
+    const int prop_num,num1,num2,num3;
 
 private slots:
     void on_nextLevelButton_clicked();

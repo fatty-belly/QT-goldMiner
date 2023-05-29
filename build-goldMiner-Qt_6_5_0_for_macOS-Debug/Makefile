@@ -58,11 +58,13 @@ SOURCES       = ../goldMiner/bomb.cpp \
 		../goldMiner/hook.cpp \
 		../goldMiner/level.cpp \
 		../goldMiner/main.cpp \
+		../goldMiner/shop.cpp \
 		../goldMiner/startwindow.cpp moc_bomb.cpp \
 		moc_endgamedialog.cpp \
 		moc_gameobject.cpp \
 		moc_hook.cpp \
 		moc_level.cpp \
+		moc_shop.cpp \
 		moc_startwindow.cpp
 OBJECTS       = bomb.o \
 		endgamedialog.o \
@@ -70,12 +72,14 @@ OBJECTS       = bomb.o \
 		hook.o \
 		level.o \
 		main.o \
+		shop.o \
 		startwindow.o \
 		moc_bomb.o \
 		moc_endgamedialog.o \
 		moc_gameobject.o \
 		moc_hook.o \
 		moc_level.o \
+		moc_shop.o \
 		moc_startwindow.o
 DIST          = /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/device_config.prf \
@@ -210,6 +214,7 @@ DIST          = /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/qt_config.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_post.prf \
+		../goldMiner/.qmake.stash \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/mac/sdk.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/toolchain.prf \
@@ -244,12 +249,14 @@ DIST          = /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_pre.prf \
 		../goldMiner/gameobject.h \
 		../goldMiner/hook.h \
 		../goldMiner/level.h \
+		../goldMiner/shop.h \
 		../goldMiner/startwindow.h ../goldMiner/bomb.cpp \
 		../goldMiner/endgamedialog.cpp \
 		../goldMiner/gameobject.cpp \
 		../goldMiner/hook.cpp \
 		../goldMiner/level.cpp \
 		../goldMiner/main.cpp \
+		../goldMiner/shop.cpp \
 		../goldMiner/startwindow.cpp
 QMAKE_TARGET  = goldMiner
 DESTDIR       = 
@@ -259,7 +266,7 @@ TARGET        = goldMiner.app/Contents/MacOS/goldMiner
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 13.3
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/build-goldMiner-Qt_6_5_0_for_macOS-Debug/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -271,7 +278,7 @@ include /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-goldMiner.app/Contents/MacOS/goldMiner: ui_endgamedialog.h ui_level.h ui_startwindow.h $(OBJECTS)  
+goldMiner.app/Contents/MacOS/goldMiner: ui_endgamedialog.h ui_level.h ui_shop.h ui_startwindow.h $(OBJECTS)  
 	@test -d goldMiner.app/Contents/MacOS/ || mkdir -p goldMiner.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -408,6 +415,7 @@ Makefile: ../goldMiner/goldMiner.pro /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/ma
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/qt_config.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/mac/sdk.prf \
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/toolchain.prf \
@@ -575,6 +583,7 @@ Makefile: ../goldMiner/goldMiner.pro /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/ma
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/qt_config.prf:
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang/qmake.conf:
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/exclusive_builds.prf:
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/mac/sdk.prf:
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/toolchain.prf:
@@ -637,9 +646,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../goldMiner/bomb.h ../goldMiner/endgamedialog.h ../goldMiner/gameobject.h ../goldMiner/hook.h ../goldMiner/level.h ../goldMiner/startwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../goldMiner/bomb.cpp ../goldMiner/endgamedialog.cpp ../goldMiner/gameobject.cpp ../goldMiner/hook.cpp ../goldMiner/level.cpp ../goldMiner/main.cpp ../goldMiner/startwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../goldMiner/endgamedialog.ui ../goldMiner/level.ui ../goldMiner/startwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../goldMiner/bomb.h ../goldMiner/endgamedialog.h ../goldMiner/gameobject.h ../goldMiner/hook.h ../goldMiner/level.h ../goldMiner/shop.h ../goldMiner/startwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../goldMiner/bomb.cpp ../goldMiner/endgamedialog.cpp ../goldMiner/gameobject.cpp ../goldMiner/hook.cpp ../goldMiner/level.cpp ../goldMiner/main.cpp ../goldMiner/shop.cpp ../goldMiner/startwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../goldMiner/endgamedialog.ui ../goldMiner/level.ui ../goldMiner/shop.ui ../goldMiner/startwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -649,6 +658,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r goldMiner.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -667,9 +677,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_bomb.cpp moc_endgamedialog.cpp moc_gameobject.cpp moc_hook.cpp moc_level.cpp moc_startwindow.cpp
+compiler_moc_header_make_all: moc_bomb.cpp moc_endgamedialog.cpp moc_gameobject.cpp moc_hook.cpp moc_level.cpp moc_shop.cpp moc_startwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_bomb.cpp moc_endgamedialog.cpp moc_gameobject.cpp moc_hook.cpp moc_level.cpp moc_startwindow.cpp
+	-$(DEL_FILE) moc_bomb.cpp moc_endgamedialog.cpp moc_gameobject.cpp moc_hook.cpp moc_level.cpp moc_shop.cpp moc_startwindow.cpp
 moc_bomb.cpp: ../goldMiner/bomb.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
@@ -719,6 +729,12 @@ moc_level.cpp: ../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
 	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/level.h -o moc_level.cpp
 
+moc_shop.cpp: ../goldMiner/shop.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/shop.h -o moc_shop.cpp
+
 moc_startwindow.cpp: ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -729,9 +745,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_endgamedialog.h ui_level.h ui_startwindow.h
+compiler_uic_make_all: ui_endgamedialog.h ui_level.h ui_shop.h ui_startwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_endgamedialog.h ui_level.h ui_startwindow.h
+	-$(DEL_FILE) ui_endgamedialog.h ui_level.h ui_shop.h ui_startwindow.h
 ui_endgamedialog.h: ../goldMiner/endgamedialog.ui \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic
 	/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic ../goldMiner/endgamedialog.ui -o ui_endgamedialog.h
@@ -739,6 +755,10 @@ ui_endgamedialog.h: ../goldMiner/endgamedialog.ui \
 ui_level.h: ../goldMiner/level.ui \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic
 	/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic ../goldMiner/level.ui -o ui_level.h
+
+ui_shop.h: ../goldMiner/shop.ui \
+		/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic ../goldMiner/shop.ui -o ui_shop.h
 
 ui_startwindow.h: ../goldMiner/startwindow.ui \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/uic
@@ -766,6 +786,17 @@ endgamedialog.o: ../goldMiner/endgamedialog.cpp ../goldMiner/endgamedialog.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qabstractbutton.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
+		../goldMiner/level.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../goldMiner/gameobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../goldMiner/shop.h \
 		ui_endgamedialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o endgamedialog.o ../goldMiner/endgamedialog.cpp
 
@@ -774,9 +805,10 @@ gameobject.o: ../goldMiner/gameobject.cpp ../goldMiner/gameobject.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qcolor.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/QPainter \
-		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpainter.h
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QRandomGenerator \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qrandom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameobject.o ../goldMiner/gameobject.cpp
 
 hook.o: ../goldMiner/hook.cpp ../goldMiner/hook.h \
@@ -833,6 +865,20 @@ main.o: ../goldMiner/main.cpp ../goldMiner/startWindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../goldMiner/main.cpp
 
+shop.o: ../goldMiner/shop.cpp ../goldMiner/shop.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../goldMiner/level.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../goldMiner/gameobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		ui_shop.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o shop.o ../goldMiner/shop.cpp
+
 startwindow.o: ../goldMiner/startwindow.cpp ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -863,6 +909,9 @@ moc_hook.o: moc_hook.cpp
 
 moc_level.o: moc_level.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_level.o moc_level.cpp
+
+moc_shop.o: moc_shop.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_shop.o moc_shop.cpp
 
 moc_startwindow.o: moc_startwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_startwindow.o moc_startwindow.cpp
