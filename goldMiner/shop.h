@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <level.h>
+#include <QPixmap>
 
 namespace Ui {
 class Shop;
@@ -31,6 +32,11 @@ private slots:
 private:
     Ui::Shop *ui;
     int levelNum;
+
+    QPixmap propmixmap;
+    QPixmap prop_1mixmap;
+    QPixmap prop_2mixmap;
+    QPixmap prop_3mixmap;
 };
 
 #endif // SHOP_H

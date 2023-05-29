@@ -40,7 +40,7 @@ Level::Level(QWidget *parent, int levelNum_) :
         generateRandomObjects(8,10);//第一关-正常关
         generateTNT(10);
         goalScore = 8000;
-        restTime = 30;
+        restTime = 1;
         score = 100000;
         Bomb::bombNum = 5;
         break;

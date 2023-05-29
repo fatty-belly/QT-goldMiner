@@ -3,6 +3,7 @@
 #include "QPoint"
 #include <QPainter>
 #include "bomb.h"
+#include <gameobject.h>
 
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
