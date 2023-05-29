@@ -60,4 +60,6 @@ public:
     void draw(QPainter& painter) const override;
 };
 
+
+
 #endif // GAMEOBJECT_H
