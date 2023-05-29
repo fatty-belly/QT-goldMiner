@@ -66,6 +66,7 @@ void Hook::updateHook()
             speed = 5;//重置速度
             if(caughtObject)
             {
+                Bomb::bombNum += caughtObject->bombplus;
                 level->restTime += caughtObject->timeplus;
                 level->score += caughtObject->score;
                 level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));

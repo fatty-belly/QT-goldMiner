@@ -4,13 +4,14 @@
 #include <random>
 using namespace std;
 
-GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_, int timeplus_ = 0) :
+GameObject::GameObject(Type type_, const QPointF& position_, int radius_, int score_,double hookSpeed_, int timeplus_ = 0, int bombplus_ = 0) :
     type(type_),
     position(position_),
     radius(radius_),
     score(score_),
     hookSpeed(hookSpeed_),
-    timeplus(timeplus_)
+    timeplus(timeplus_),
+    bombplus(bombplus_)
 {
 
 }
@@ -59,9 +60,22 @@ TimePlus::TimePlus(const QPointF &position_, int radius_):
 
 void TimePlus::draw(QPainter &painter) const{
     QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png");
-    goldImage = goldImage.scaled(4*radius,4*radius);
+    goldImage = goldImage.scaled(2*radius,2*radius);
     painter.drawImage(position-QPointF(radius,radius),goldImage);
 }
+
+
+BombPlus::BombPlus(const QPointF &position_, int radius_):
+    GameObject(Type::BombPlus,position_,radius_, 0, 5 + radius_ * 0.09, 0, 2)
+{
+}
+
+void BombPlus::draw(QPainter &painter) const{
+    QImage goldImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
+    goldImage = goldImage.scaled(2*radius,2*radius);
+    painter.drawImage(position-QPointF(radius,radius),goldImage);
+}
+
 
 Bag::Bag(const QPointF &position_, int radius_):
     GameObject(Type::Bag,position_,radius_,0,5 + radius_ * 0.09)
@@ -70,7 +84,7 @@ Bag::Bag(const QPointF &position_, int radius_):
     mt19937 gen(rd());
 
     // 创建随机数分布
-    uniform_int_distribution<int> dis(0, 2);
+    uniform_int_distribution<int> dis(0, 3);
 
     // 生成随机数
     int randomNum = dis(gen);
@@ -91,6 +105,12 @@ Bag::Bag(const QPointF &position_, int radius_):
         score = 0;
         hookSpeed = 5 + radius_ * 0.09;
         timeplus = 10;
+    }
+    else if (randomNum == 3){
+        type = BombPlus;
+        score = 0;
+        hookSpeed = 5 + radius_ * 0.09;
+        bombplus = 2;
     }
 }
 

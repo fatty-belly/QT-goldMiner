@@ -30,7 +30,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     {
     case 1:
 //        generateRandomObjects(8,12);//第一关-正常关
-        generateBags(5);//神秘背包
+        generateBombPlus(10);//神秘背包
         goalScore = 7500;
         Bomb::bombNum = 5;
         break;
@@ -232,6 +232,34 @@ void Level::generateBags(int numBags){
         gameObjects.push_back(new Bag(QPoint(x, y), radius));
     }
 }
+
+
+
+void Level::generateBombPlus(int numBombPlus){
+    for (int i = 0;i < numBombPlus;i++){
+        int x,y,radius;
+        bool flag = false;
+        while(!flag)
+        {
+            flag=true;
+            x = QRandomGenerator::global()->bounded(0, 600);
+            y = QRandomGenerator::global()->bounded(0, 300); // 时间道具在比较下面
+            radius = QRandomGenerator::global()->bounded(25, 35);
+            for(GameObject* object:gameObjects)
+            {
+                if(object->type == GameObject::Type::Stone || object->type == GameObject::Type::Gold)
+                    continue;
+                if(sqrt(pow(x-object->position.x(), 2) + pow(y-object->position.y(), 2)) < 2*(radius + object->radius))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }//碰撞检测
+        gameObjects.push_back(new BombPlus(QPoint(x, y), radius));
+    }
+}
+
 
 
 void Level::paintGameObjects()
