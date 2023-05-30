@@ -63,25 +63,25 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
             textLabel[i]->setText("炸药 $1000");
             pixLabel[i]->setPixmap(propmixmap);
             if(coin<1000)
-                button[0]->setEnabled(false);
+                button[i]->setEnabled(false);
             break;
         case 1:// 大力药水
             textLabel[i]->setText("大力药水 $3500");
             pixLabel[i]->setPixmap(prop_1mixmap);
             if(coin<3500)
-                button[0]->setEnabled(false);
+                button[i]->setEnabled(false);
             break;
         case 2:// 增加时间
             textLabel[i]->setText("增加15秒 $5000");
             pixLabel[i]->setPixmap(prop_2mixmap);
             if(coin<5000)
-                button[0]->setEnabled(false);
+                button[i]->setEnabled(false);
             break;
         case 3:// 减半
             textLabel[i]->setText("时间减半 目标分数减半\n $8000");
             pixLabel[i]->setPixmap(prop_3mixmap);
             if(coin<8000)
-                button[0]->setEnabled(false);
+                button[i]->setEnabled(false);
             break;
         default:
             break;
@@ -137,19 +137,48 @@ void Shop::buyProp(int id)
     }
 }
 
+void Shop::modifyButton()
+{
+    QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};
+    for(int i=0;i<3;i++)
+    {
+        switch (num[i]){
+        case 0:// 炸药
+            if(coin<1000)
+                button[i]->setEnabled(false);
+            break;
+        case 1:// 大力药水
+            if(coin<3500)
+                button[i]->setEnabled(false);
+            break;
+        case 2:// 增加时间
+            if(coin<5000)
+                button[i]->setEnabled(false);
+            break;
+        case 3:// 减半
+            if(coin<8000)
+                button[i]->setEnabled(false);
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 void Shop::on_pushButton_clicked()
 {
     buyProp(num[0]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton->setEnabled(false);
+    modifyButton();
 }
-
 
 void Shop::on_pushButton_2_clicked()
 {
     buyProp(num[1]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_2->setEnabled(false);
+    modifyButton();
 }
 
 
@@ -158,6 +187,7 @@ void Shop::on_pushButton_3_clicked()
     buyProp(num[2]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_3->setEnabled(false);
+    modifyButton();
 }
 
 

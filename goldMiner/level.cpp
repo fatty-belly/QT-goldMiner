@@ -35,7 +35,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-        //generateProps(5);
+        generateProps(5);
         generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
         goalScore = 8000;

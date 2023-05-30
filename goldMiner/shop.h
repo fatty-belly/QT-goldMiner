@@ -20,6 +20,7 @@ public:
     int numProp,num[3];
     Level * level;
     void buyProp(int id);
+    void modifyButton();
 
 private slots:
     void on_nextLevelButton_clicked();

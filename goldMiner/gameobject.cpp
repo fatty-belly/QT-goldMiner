@@ -64,7 +64,7 @@ void TimePlus::draw(QPainter &painter) const{
 }
 
 BombPlus::BombPlus(const QPointF &position_, int radius_):
-    GameObject(Type::BombPlus,position_,radius_, 0, 5, 0, 2)
+    GameObject(Type::BombPlus,position_,radius_, 0, 5, 0, 1)
 {
 }
 

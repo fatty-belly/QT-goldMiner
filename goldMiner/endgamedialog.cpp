@@ -26,7 +26,7 @@ EndGameDialog::EndGameDialog(int addCoin_, int levelNum_, bool win_) :
         ui->pushButton->setText("结束游戏");
     }
 
-    if(win)
+    if(win && levelNum < Level::totalLevelNum)
     {
         switch(levelNum)
         {
@@ -46,8 +46,6 @@ EndGameDialog::EndGameDialog(int addCoin_, int levelNum_, bool win_) :
             ui->hintLabel->setText("下面是最后一关！\n时间就是生命，我的朋友");
             break;
         }
-
-
     }
     else
     {

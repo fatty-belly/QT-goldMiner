@@ -44,11 +44,11 @@ void Hook::updateHook()
             }
         }
         // 钩到TNT
-        if (caughtObject && caughtObject->type == GameObject::Type::TNT){
+        if (!extend_direction && caughtObject && caughtObject->type == GameObject::Type::TNT){
             for(auto it = level->gameObjects.begin();it!=level->gameObjects.end();it++)//逐个遍历所有物体
             {
                 if (pow((*it)->position.x() - caughtObject->position.x(),2) +
-                        pow((*it)->position.y() - caughtObject->position.y(), 2) <= 10000){
+                        pow((*it)->position.y() - caughtObject->position.y(), 2) <= 5000){
                     if ((*it) != caughtObject){
                         it = level->gameObjects.erase(it);
                     }
