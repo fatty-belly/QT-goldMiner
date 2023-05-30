@@ -22,7 +22,7 @@ class Ui_EndGameDialog
 public:
     QLabel *label;
     QPushButton *pushButton;
-    QLabel *bombLabel;
+    QLabel *hintLabel;
 
     void setupUi(QDialog *EndGameDialog)
     {
@@ -39,13 +39,13 @@ public:
         pushButton = new QPushButton(EndGameDialog);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(280, 250, 80, 31));
-        bombLabel = new QLabel(EndGameDialog);
-        bombLabel->setObjectName("bombLabel");
-        bombLabel->setGeometry(QRect(80, 199, 241, 31));
+        hintLabel = new QLabel(EndGameDialog);
+        hintLabel->setObjectName("hintLabel");
+        hintLabel->setGeometry(QRect(30, 179, 341, 51));
         QFont font1;
         font1.setPointSize(14);
-        bombLabel->setFont(font1);
-        bombLabel->setAlignment(Qt::AlignCenter);
+        hintLabel->setFont(font1);
+        hintLabel->setAlignment(Qt::AlignCenter);
 
         retranslateUi(EndGameDialog);
 
@@ -57,7 +57,7 @@ public:
         EndGameDialog->setWindowTitle(QCoreApplication::translate("EndGameDialog", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("EndGameDialog", "TextLabel", nullptr));
         pushButton->setText(QCoreApplication::translate("EndGameDialog", "PushButton", nullptr));
-        bombLabel->setText(QCoreApplication::translate("EndGameDialog", "TextLabel", nullptr));
+        hintLabel->setText(QCoreApplication::translate("EndGameDialog", "TextLabel", nullptr));
     } // retranslateUi
 
 };

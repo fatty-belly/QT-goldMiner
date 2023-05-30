@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=11.0 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=11.0 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../goldMiner -I. -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -F/Users/zhaohaonan/QT/6.5.0/macos/lib
+INCPATH       = -I../goldMiner -I. -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -F/Users/zhaohaonan/QT/6.5.0/macos/lib
 QMAKE         = /Users/zhaohaonan/QT/6.5.0/macos/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = goldMiner1.0.0
 DISTDIR = /Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/build-goldMiner-Qt_6_5_0_for_macOS-Debug/.tmp/goldMiner1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=11.0 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/zhaohaonan/QT/6.5.0/macos/lib
-LIBS          = $(SUBLIBS) -F/Users/zhaohaonan/QT/6.5.0/macos/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/Users/zhaohaonan/QT/6.5.0/macos/lib -framework QtWidgets -framework QtMultimedia -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtNetwork -framework QtCore -framework IOKit -framework DiskArbitration -framework AGL -framework OpenGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -447,7 +447,9 @@ Makefile: ../goldMiner/goldMiner.pro /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/ma
 		/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/lex.prf \
 		../goldMiner/goldMiner.pro \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Resources/QtGui.prl \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Resources/QtNetwork.prl \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile ../goldMiner/goldMiner.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/spec_pre.prf:
@@ -615,7 +617,9 @@ Makefile: ../goldMiner/goldMiner.pro /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/ma
 /Users/zhaohaonan/QT/6.5.0/macos/mkspecs/features/lex.prf:
 ../goldMiner/goldMiner.pro:
 /Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
+/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Resources/QtMultimedia.prl:
 /Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Resources/QtGui.prl:
+/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Resources/QtNetwork.prl:
 /Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../goldMiner/goldMiner.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
@@ -684,14 +688,14 @@ moc_bomb.cpp: ../goldMiner/bomb.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/bomb.h -o moc_bomb.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/bomb.h -o moc_bomb.cpp
 
 moc_endgamedialog.cpp: ../goldMiner/endgamedialog.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qabstractbutton.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/endgamedialog.h -o moc_endgamedialog.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/endgamedialog.h -o moc_endgamedialog.cpp
 
 moc_gameobject.cpp: ../goldMiner/gameobject.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qpoint.h \
@@ -699,7 +703,7 @@ moc_gameobject.cpp: ../goldMiner/gameobject.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/gameobject.h -o moc_gameobject.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/gameobject.h -o moc_gameobject.cpp
 
 moc_hook.cpp: ../goldMiner/hook.h \
 		ui_level.h \
@@ -713,8 +717,12 @@ moc_hook.cpp: ../goldMiner/hook.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/hook.h -o moc_hook.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/hook.h -o moc_hook.cpp
 
 moc_level.cpp: ../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
@@ -726,20 +734,40 @@ moc_level.cpp: ../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/level.h -o moc_level.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/level.h -o moc_level.cpp
 
 moc_shop.cpp: ../goldMiner/shop.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../goldMiner/level.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../goldMiner/gameobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpixmap.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/shop.h -o moc_shop.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/shop.h -o moc_shop.cpp
 
 moc_startwindow.cpp: ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc
-	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/startwindow.h -o moc_startwindow.cpp
+	/Users/zhaohaonan/QT/6.5.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=3 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/zhaohaonan/QT/6.5.0/macos/mkspecs/macx-clang -I/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtNetwork.framework/Headers -I/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/zhaohaonan/QT/6.5.0/macos/lib ../goldMiner/startwindow.h -o moc_startwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -796,7 +824,13 @@ endgamedialog.o: ../goldMiner/endgamedialog.cpp ../goldMiner/endgamedialog.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../goldMiner/shop.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpixmap.h \
 		ui_endgamedialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o endgamedialog.o ../goldMiner/endgamedialog.cpp
 
@@ -823,6 +857,10 @@ hook.o: ../goldMiner/hook.cpp ../goldMiner/hook.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QPoint \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/QPainter \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpainter.h \
@@ -839,6 +877,10 @@ level.o: ../goldMiner/level.cpp ../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../goldMiner/endgamedialog.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qabstractbutton.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QDialog \
@@ -856,9 +898,11 @@ level.o: ../goldMiner/level.cpp ../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level.o ../goldMiner/level.cpp
 
-main.o: ../goldMiner/main.cpp ../goldMiner/startWindow.h \
+main.o: ../goldMiner/main.cpp ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QDebug \
@@ -876,12 +920,25 @@ shop.o: ../goldMiner/shop.cpp ../goldMiner/shop.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		ui_shop.h
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		../goldMiner/hook.h \
+		ui_level.h \
+		ui_shop.h \
+		../goldMiner/bomb.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QRandomGenerator \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qrandom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o shop.o ../goldMiner/shop.cpp
 
 startwindow.o: ../goldMiner/startwindow.cpp ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QSoundEffect \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../goldMiner/level.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -892,6 +949,8 @@ startwindow.o: ../goldMiner/startwindow.cpp ../goldMiner/startwindow.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		/Users/zhaohaonan/QT/6.5.0/macos/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		ui_startwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o startwindow.o ../goldMiner/startwindow.cpp
 

@@ -4,11 +4,12 @@
 #include <QPainter>
 #include "bomb.h"
 #include <gameobject.h>
+#include <QSoundEffect>
 
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("../goldMiner/Images/hook.png"),
+    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -21,6 +22,8 @@ Hook::Hook(Ui::Level *u, Level *l):
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Hook::updateHook);
     timer->start(60);//60ms更新一次钩子状态
+
+
 }
 
 void Hook::updateHook()

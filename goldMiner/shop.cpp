@@ -11,10 +11,10 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("../goldMiner/Images/TNT.png"),
-    prop_1mixmap("../goldMiner/Images/+.png"),
-    prop_2mixmap("../goldMiner/Images/time.png"),
-    prop_3mixmap("../goldMiner/Images/bag.png")
+    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
+    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
+    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
+    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png")
 {
     coin += coin_;
     numProp = 4;
@@ -99,6 +99,7 @@ void Shop::on_nextLevelButton_clicked()
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, level, &Level::updateTimer);
     gameTimer->start(1000);
+//    level->BGM("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav",1);
     level->show();
     this->hide();
 }

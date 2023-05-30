@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QMainWindow>
+#include <QSoundEffect>
 
 namespace Ui {
 class StartWindow;

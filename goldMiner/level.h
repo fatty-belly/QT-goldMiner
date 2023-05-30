@@ -6,6 +6,9 @@
 #include <gameobject.h>
 #include <vector>
 #include <deque>
+#include <QMediaPlayer>
+#include <QSoundEffect>
+#include <QString>
 
 namespace Ui {
 class Level;
@@ -29,7 +32,8 @@ public:
     Hook* hook = NULL;
     int goalScore;
     Ui::Level *ui;
-
+    QSoundEffect *startsound;
+    void BGM(QString str,bool play);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
@@ -44,9 +48,11 @@ protected:
     void paintEvent(QPaintEvent* event) override;//打印关卡所有东西
     void drawBombImage();//画出炸药的特效
 
-private:
 
+
+private:
     QPixmap minerPixmap;
+
 
     int levelNum;//第几关
 };

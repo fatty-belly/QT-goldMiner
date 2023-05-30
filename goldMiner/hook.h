@@ -4,6 +4,7 @@
 #include "ui_level.h"
 #include <level.h>
 #include <QObject>
+#include <QSoundEffect>
 
 class Hook:public QObject
 {
@@ -19,6 +20,8 @@ public:
     QPointF position;//钩子现在的位置
     GameObject* caughtObject = NULL;//钩子抓取到的物体
     double multiplier = 1.2;
+
+
 
 
 private:

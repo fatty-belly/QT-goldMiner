@@ -9,6 +9,8 @@
 #include <QPainter>
 #include <QTime>
 #include <deque>
+#include <QSoundEffect>
+
 
 int Level::totalLevelNum = 6;
 
@@ -17,7 +19,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
+    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
@@ -26,6 +28,14 @@ Level::Level(QWidget *parent, int levelNum_) :
     StrengthDownTimeDeq.clear();
     StrengthUpTimeDeq.clear();
     hook = new Hook(ui, this);
+
+    // 添加BGM
+    startsound = new QSoundEffect(this);//创建对象
+    startsound->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav"));//添加资源
+    startsound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
+    startsound->setVolume(0.50f);
+    startsound->play();
+
     if (levelNum == 1)
     {
         QTimer *gameTimer = new QTimer(this);
@@ -35,18 +45,20 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-        generateProps(5);
+//        generateProps(5);
         generateDiamonds(2);
-        generateRandomObjects(8,10);//第一关-正常关
-        goalScore = 8000;
+//        generateRandomObjects(8,10);//第一关-正常关
+        restTime = 10;
+        goalScore = 0;
         Bomb::bombNum = 5;
         break;
     case 2:
-        generateProps(5);
-        generateDiamonds(1);
+//        generateProps(5);
+//        generateDiamonds(1);
         generateTimePlus(1);
-        generateRandomObjects(10,10);//第二关-正常关
-        goalScore = 10000;
+//        generateRandomObjects(10,10);//第二关-正常关
+        goalScore = 0;
+        restTime = 10;
         break;
     case 3:
         generateTimePlus(2);
@@ -305,7 +317,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("../goldMiner/Images/bomb.png");
+    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -368,6 +380,7 @@ void Level::updateTimer()
     if(restTime == 0 || (gameObjects.size() == 0 && restTime > 0))
     {
         restTime = -1;
+        startsound->stop();
         this->close();
         if(score < goalScore)
         {
@@ -381,6 +394,22 @@ void Level::updateTimer()
         }
     }
 }
+
+//void Level::BGM(QString str,bool play){
+//    // 添加BGM
+//    QSoundEffect *sound = new QSoundEffect(this);//创建对象
+//    sound->setSource(QUrl::fromLocalFile(str));//添加资源
+//    sound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
+//    sound->setVolume(0.50f);
+//    if (play){
+//        sound->play();
+//    }
+//    else{
+//        sound->stop();
+//    }
+
+//}
+
 
 Level::~Level()
 {
