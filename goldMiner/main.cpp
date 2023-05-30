@@ -1,8 +1,7 @@
-#include "startwindow.h"
+#include "startWindow.h"
 
 #include <QApplication>
 #include <QDebug>
-#include <QSoundEffect>
 
 int main(int argc, char *argv[])
 {

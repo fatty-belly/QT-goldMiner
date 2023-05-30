@@ -14,14 +14,13 @@
 
 int Level::totalLevelNum = 6;
 
-Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
+Level::Level(QWidget *parent, int levelNum_) :
     QWidget(parent),
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
-    levelNum(levelNum_),
-    bgm_url(bgm_url_)
+    minerPixmap("../goldMiner/Images/goldminer.png"),
+    levelNum(levelNum_)
 {
     ui->setupUi(this);
     ui->minerLabel->setPixmap(minerPixmap);
@@ -31,10 +30,9 @@ Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
     hook = new Hook(ui, this);
 
     // 添加BGM
-    startsound = new QSoundEffect(this);//创建对象
-    startsound->setSource(QUrl::fromLocalFile(bgm_url));//添加资源
-    startsound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
-    startsound->setVolume(0.50f);
+    player = new QSoundEffect;
+    player->setSource(QUrl::fromLocalFile("../goldMiner/Music/level_bgm.wav"));
+    player->setLoopCount(QSoundEffect::Infinite);
 
     if (levelNum == 1)
     {
@@ -48,8 +46,7 @@ Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
         generateProps(5);
         generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
-        goalScore = 0;
-        restTime = 1;
+        goalScore = 8000;
         Bomb::bombNum = 5;
         break;
     case 2:
@@ -318,7 +315,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
+    QImage bombImage("../goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -348,31 +345,21 @@ void Level::updateTimer()
         for(i=StrengthUpTimeDeq.begin();i != StrengthUpTimeDeq.end();i++)
         {
             (*i)--;
-            //qDebug() << *i;
             if ((*i) == 0){
                 hook->multiplier /= 1.5;
             }
         }
-        /*while (StrengthUpTimeDeq[0] == 0)
-        {
-            StrengthUpTimeDeq.pop_front();
-        }*/
     }
     if (!StrengthDownTimeDeq.empty())
     {
         for(i=StrengthDownTimeDeq.begin();i != StrengthDownTimeDeq.end();i++)
         {
             (*i)--;
-            //qDebug() << *i;
             if ((*i) == 0)
             {
                 hook->multiplier *= 1.5;
             }
         }
-        /*while (StrengthDownTimeDeq[0] == 0)
-        {
-            StrengthDownTimeDeq.pop_front();
-        }*/
     }
     if(Bomb::bombImageTime > 0)
         Bomb::bombImageTime--;
@@ -381,7 +368,7 @@ void Level::updateTimer()
     if(restTime == 0 || (gameObjects.size() == 0 && restTime > 0))
     {
         restTime = -1;
-        startsound->stop();
+        player->stop();
         this->close();
         if(score < goalScore)
         {
@@ -393,6 +380,7 @@ void Level::updateTimer()
             EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,true);
             endGameDialog->show();
         }
+        hook = NULL;
     }
 }
 

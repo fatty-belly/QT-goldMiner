@@ -18,7 +18,7 @@ void StartWindow::on_pushButton_clicked()
 {
     close();
     Level *level = new Level(nullptr, 1);
-    level->startsound->play();
+    level->player->play();
     level->show();
 }
 

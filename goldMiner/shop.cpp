@@ -11,11 +11,10 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
-    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
-    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
-    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png"),
-    Davemixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/CrazyDave.png")
+    propmixmap("../goldMiner/Images/TNT.png"),
+    prop_1mixmap("../goldMiner/Images/+.png"),
+    prop_2mixmap("../goldMiner/Images/time.png"),
+    prop_3mixmap("../goldMiner/Images/bag.png")
 {
     coin += coin_;
     numProp = 4;
@@ -24,12 +23,10 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     level= new Level(nullptr, levelNum);
 
     // 播放BGM
-    shop_bgm = new QSoundEffect(this);//创建对象
-    shop_bgm->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop_bgm.wav"));//添加资源
-    shop_bgm->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
-    shop_bgm->setVolume(0.50f);
-    shop_bgm->play();
-
+    player = new QSoundEffect;
+    player->setSource(QUrl::fromLocalFile("../goldMiner/Music/shop_bgm.wav"));
+    player->setLoopCount(QSoundEffect::Infinite);
+    player->play();
     // 产生三个随机数
     int index = 0;
     while (true){
@@ -61,7 +58,6 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     prop_1mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_2mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_3mixmap.scaled(20,20,Qt::KeepAspectRatio);
-    ui->label_8->setPixmap(Davemixmap);
     QLabel* textLabel[3] = {ui->label,ui->label_2,ui->label_3};
     QLabel* pixLabel[3] = {ui->label_5,ui->label_6,ui->label_7};
     QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};
@@ -108,9 +104,9 @@ void Shop::on_nextLevelButton_clicked()
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, level, &Level::updateTimer);
     gameTimer->start(1000);
-    shop_bgm->stop();
+    player->stop();
     level->show();
-    level->startsound->play();
+    level->player->play();
     this->hide();
 }
 

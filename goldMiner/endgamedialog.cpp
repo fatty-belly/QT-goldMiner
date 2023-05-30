@@ -60,11 +60,11 @@ EndGameDialog::~EndGameDialog()
 
 void EndGameDialog::on_pushButton_clicked()
 {
-    close();
     if(win && levelNum < Level::totalLevelNum)
     {
         Shop *shop = new Shop(addCoin, nullptr,levelNum + 1);
         shop->show();
     }
+    close();
 }
 
