@@ -33,17 +33,18 @@ public:
     QLabel *label_5;
     QLabel *label_6;
     QLabel *label_7;
+    QLabel *label_8;
 
     void setupUi(QWidget *Shop)
     {
         if (Shop->objectName().isEmpty())
             Shop->setObjectName("Shop");
-        Shop->resize(477, 300);
+        Shop->resize(802, 397);
         Shop->setAutoFillBackground(true);
         Shop->setStyleSheet(QString::fromUtf8(""));
         pushButton = new QPushButton(Shop);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(40, 180, 80, 31));
+        pushButton->setGeometry(QRect(40, 230, 80, 31));
         pushButton->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton->setAutoFillBackground(true);
         QIcon icon;
@@ -51,56 +52,60 @@ public:
         pushButton->setIcon(icon);
         pushButton_2 = new QPushButton(Shop);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(190, 180, 80, 31));
+        pushButton_2->setGeometry(QRect(190, 230, 80, 31));
         pushButton_2->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_2->setAutoFillBackground(true);
         pushButton_2->setIcon(icon);
         pushButton_3 = new QPushButton(Shop);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(340, 180, 80, 31));
+        pushButton_3->setGeometry(QRect(340, 230, 80, 31));
         pushButton_3->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_3->setAutoFillBackground(true);
         pushButton_3->setIcon(icon);
         label = new QLabel(Shop);
         label->setObjectName("label");
-        label->setGeometry(QRect(10, 210, 141, 51));
+        label->setGeometry(QRect(10, 260, 141, 51));
         label->setScaledContents(true);
         label->setAlignment(Qt::AlignCenter);
         label_2 = new QLabel(Shop);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(160, 210, 141, 51));
+        label_2->setGeometry(QRect(160, 260, 141, 51));
         label_2->setScaledContents(true);
         label_2->setAlignment(Qt::AlignCenter);
         label_3 = new QLabel(Shop);
         label_3->setObjectName("label_3");
-        label_3->setGeometry(QRect(310, 210, 141, 51));
+        label_3->setGeometry(QRect(310, 260, 141, 51));
         label_3->setScaledContents(true);
         label_3->setAlignment(Qt::AlignCenter);
         nextLevelButton = new QPushButton(Shop);
         nextLevelButton->setObjectName("nextLevelButton");
-        nextLevelButton->setGeometry(QRect(360, 20, 80, 31));
+        nextLevelButton->setGeometry(QRect(360, 30, 80, 31));
         label_4 = new QLabel(Shop);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(210, 20, 91, 31));
+        label_4->setGeometry(QRect(210, 30, 91, 31));
         coinLabel = new QLabel(Shop);
         coinLabel->setObjectName("coinLabel");
-        coinLabel->setGeometry(QRect(30, 20, 121, 31));
+        coinLabel->setGeometry(QRect(30, 30, 121, 31));
         label_5 = new QLabel(Shop);
         label_5->setObjectName("label_5");
-        label_5->setGeometry(QRect(40, 80, 81, 81));
+        label_5->setGeometry(QRect(40, 120, 81, 81));
         label_5->setScaledContents(true);
         label_5->setAlignment(Qt::AlignCenter);
         label_6 = new QLabel(Shop);
         label_6->setObjectName("label_6");
-        label_6->setGeometry(QRect(190, 80, 81, 81));
+        label_6->setGeometry(QRect(190, 120, 81, 81));
         label_6->setScaledContents(true);
         label_6->setAlignment(Qt::AlignCenter);
         label_7 = new QLabel(Shop);
         label_7->setObjectName("label_7");
-        label_7->setGeometry(QRect(340, 80, 81, 81));
+        label_7->setGeometry(QRect(340, 120, 81, 81));
         label_7->setScaledContents(true);
         label_7->setAlignment(Qt::AlignCenter);
         label_7->setWordWrap(false);
+        label_8 = new QLabel(Shop);
+        label_8->setObjectName("label_8");
+        label_8->setGeometry(QRect(540, 0, 201, 391));
+        label_8->setAutoFillBackground(true);
 
         retranslateUi(Shop);
 
@@ -122,6 +127,7 @@ public:
         label_5->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
         label_6->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
         label_7->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
+        label_8->setText(QCoreApplication::translate("Shop", "TextLabel", nullptr));
     } // retranslateUi
 
 };

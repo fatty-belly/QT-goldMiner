@@ -41,6 +41,7 @@ private:
     QPixmap prop_1mixmap;
     QPixmap prop_2mixmap;
     QPixmap prop_3mixmap;
+    QPixmap Davemixmap;
 };
 
 #endif // SHOP_H

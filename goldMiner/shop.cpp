@@ -14,7 +14,8 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
     prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
     prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
-    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png")
+    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png"),
+    Davemixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/CrazyDave.png")
 {
     coin += coin_;
     numProp = 4;
@@ -60,6 +61,7 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     prop_1mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_2mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_3mixmap.scaled(20,20,Qt::KeepAspectRatio);
+    ui->label_8->setPixmap(Davemixmap);
     QLabel* textLabel[3] = {ui->label,ui->label_2,ui->label_3};
     QLabel* pixLabel[3] = {ui->label_5,ui->label_6,ui->label_7};
     QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};

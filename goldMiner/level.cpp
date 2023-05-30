@@ -48,7 +48,8 @@ Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
         generateProps(5);
         generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
-        goalScore = 8000;
+        goalScore = 0;
+        restTime = 1;
         Bomb::bombNum = 5;
         break;
     case 2:
