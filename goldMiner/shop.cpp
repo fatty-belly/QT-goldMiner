@@ -22,6 +22,13 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     level= new Level(nullptr, levelNum);
 
+    // 播放BGM
+    shop_bgm = new QSoundEffect(this);//创建对象
+    shop_bgm->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop.wav"));//添加资源
+    shop_bgm->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
+    shop_bgm->setVolume(0.50f);
+    shop_bgm->play();
+
     // 产生三个随机数
     int index = 0;
     while (true){
@@ -99,8 +106,9 @@ void Shop::on_nextLevelButton_clicked()
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, level, &Level::updateTimer);
     gameTimer->start(1000);
-//    level->BGM("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav",1);
+    shop_bgm->stop();
     level->show();
+    level->startsound->play();
     this->hide();
 }
 

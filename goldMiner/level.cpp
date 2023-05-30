@@ -14,13 +14,14 @@
 
 int Level::totalLevelNum = 6;
 
-Level::Level(QWidget *parent, int levelNum_) :
+Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
     QWidget(parent),
     score(0),
     restTime(90),
     ui(new Ui::Level),
     minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
-    levelNum(levelNum_)
+    levelNum(levelNum_),
+    bgm_url(bgm_url_)
 {
     ui->setupUi(this);
     ui->minerLabel->setPixmap(minerPixmap);
@@ -31,10 +32,9 @@ Level::Level(QWidget *parent, int levelNum_) :
 
     // 添加BGM
     startsound = new QSoundEffect(this);//创建对象
-    startsound->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav"));//添加资源
+    startsound->setSource(QUrl::fromLocalFile(bgm_url));//添加资源
     startsound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
     startsound->setVolume(0.50f);
-    startsound->play();
 
     if (levelNum == 1)
     {
@@ -45,19 +45,18 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-//        generateProps(5);
+        generateProps(5);
         generateDiamonds(2);
-//        generateRandomObjects(8,10);//第一关-正常关
-        restTime = 10;
-        goalScore = 0;
+        generateRandomObjects(8,10);//第一关-正常关
+        goalScore = 8000;
         Bomb::bombNum = 5;
         break;
     case 2:
-//        generateProps(5);
-//        generateDiamonds(1);
+        generateProps(5);
+        generateDiamonds(1);
         generateTimePlus(1);
-//        generateRandomObjects(10,10);//第二关-正常关
-        goalScore = 0;
+        generateRandomObjects(10,10);//第二关-正常关
+        goalScore = 10000;
         restTime = 10;
         break;
     case 3:
@@ -87,6 +86,8 @@ Level::Level(QWidget *parent, int levelNum_) :
     ui->goalScoreLabel->setText(QString("目标分数:%1").arg(goalScore));
     update();
 }
+
+
 
 void Level::keyPressEvent(QKeyEvent *event)
 {

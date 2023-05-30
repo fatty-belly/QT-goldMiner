@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <level.h>
 #include <QPixmap>
+#include <QSoundEffect>
 
 namespace Ui {
 class Shop;
@@ -21,6 +22,7 @@ public:
     Level * level;
     void buyProp(int id);
     void modifyButton();
+    QSoundEffect *shop_bgm;
 
 private slots:
     void on_nextLevelButton_clicked();

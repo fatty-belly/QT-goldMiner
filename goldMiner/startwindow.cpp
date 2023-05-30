@@ -18,7 +18,7 @@ void StartWindow::on_pushButton_clicked()
 {
     close();
     Level *level = new Level(nullptr, 1);
-//    level->BGM("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav",1);
+    level->startsound->play();
     level->show();
 }
 
