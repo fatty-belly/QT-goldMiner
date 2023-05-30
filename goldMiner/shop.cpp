@@ -24,7 +24,7 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
 
     // 播放BGM
     shop_bgm = new QSoundEffect(this);//创建对象
-    shop_bgm->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop.wav"));//添加资源
+    shop_bgm->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop_bgm.wav"));//添加资源
     shop_bgm->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
     shop_bgm->setVolume(0.50f);
     shop_bgm->play();

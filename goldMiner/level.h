@@ -21,7 +21,7 @@ class Level : public QWidget
     Q_OBJECT
 
 public:
-    explicit Level(QWidget *parent = nullptr, int levelNum_ = 1, QString bgm_url_ = "/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bgm.wav");//levelNum代表第几关
+    explicit Level(QWidget *parent = nullptr, int levelNum_ = 1, QString bgm_url_ = "/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/level_bgm.wav");//levelNum代表第几关
     ~Level();
     std::vector<GameObject*> gameObjects;//关卡内所有现存物体
     int score;//总得分

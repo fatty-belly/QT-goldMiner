@@ -57,7 +57,6 @@ Level::Level(QWidget *parent, int levelNum_, QString bgm_url_) :
         generateTimePlus(1);
         generateRandomObjects(10,10);//第二关-正常关
         goalScore = 10000;
-        restTime = 10;
         break;
     case 3:
         generateTimePlus(2);
