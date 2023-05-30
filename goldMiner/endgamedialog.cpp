@@ -26,13 +26,32 @@ EndGameDialog::EndGameDialog(int addCoin_, int levelNum_, bool win_) :
         ui->pushButton->setText("结束游戏");
     }
 
-    if(win && levelNum == 3)
+    if(win)
     {
-        ui->bombLabel->setText("你获得了5个炸药补给:)");
+        switch(levelNum)
+        {
+        case 1:
+            ui->hintLabel->setText("下面是比较简单的第二关~, 总共6关");
+            break;
+        case 2:
+            ui->hintLabel->setText("下面是第三关，共六关\n一闪一闪亮晶晶，满地都是小钻石~");
+            break;
+        case 3:
+            ui->hintLabel->setText("下面是第四关，共六关\n地震了，满地都是碎石");
+            break;
+        case 4:
+            ui->hintLabel->setText("下面是第五关，共六关\n为什么地下会下雪？");
+            break;
+        case 5:
+            ui->hintLabel->setText("下面是最后一关！\n时间就是生命，我的朋友");
+            break;
+        }
+
+
     }
     else
     {
-        ui->bombLabel->hide();
+        ui->hintLabel->hide();
     }
 }
 

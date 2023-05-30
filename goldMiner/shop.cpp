@@ -11,10 +11,10 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
-    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
-    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
-    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png")
+    propmixmap("../goldMiner/Images/TNT.png"),
+    prop_1mixmap("../goldMiner/Images/+.png"),
+    prop_2mixmap("../goldMiner/Images/time.png"),
+    prop_3mixmap("../goldMiner/Images/bag.png")
 {
     coin += coin_;
     numProp = 4;
@@ -27,19 +27,19 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     while (true){
         int randomNum = QRandomGenerator::global()->bounded(0, numProp);
         if (index == 0){
-            num1 = randomNum;
+            num[0] = randomNum;
         }
         else if(index == 1){
-            if (randomNum != num1){
-                num2 = randomNum;
+            if (randomNum != num[0]){
+                num[1] = randomNum;
             }
             else{
                 continue;
             }
         }
         else{
-            if (randomNum != num1 && num2 != randomNum){
-                num3 = randomNum;
+            if (randomNum != num[0] && num[1] != randomNum){
+                num[2] = randomNum;
                 break;
             }
             else{
@@ -53,69 +53,40 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     prop_1mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_2mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_3mixmap.scaled(20,20,Qt::KeepAspectRatio);
-    switch (num1){
-    case 0:// 炸药
-        ui->label->setText("炸药 $500");
-        ui->label_5->setPixmap(propmixmap);
-        break;
-    case 1:// 大力药水
-        ui->label->setText("大力药水 $2000");
-        ui->label_5->setPixmap(prop_1mixmap);
-        break;
-    case 2:// 增加时间
-        ui->label->setText("增加15秒 $1000");
-        ui->label_5->setPixmap(prop_2mixmap);
-        break;
-    case 3:// 减半
-        ui->label->setText("时间分数减半 $5000");
-        ui->label_5->setPixmap(prop_3mixmap);
-        break;
-    default:
-        break;
+    QLabel* textLabel[3] = {ui->label,ui->label_2,ui->label_3};
+    QLabel* pixLabel[3] = {ui->label_5,ui->label_6,ui->label_7};
+    QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};
+    for(int i=0;i<3;i++)
+    {
+        switch (num[i]){
+        case 0:// 炸药
+            textLabel[i]->setText("炸药 $1000");
+            pixLabel[i]->setPixmap(propmixmap);
+            if(coin<1000)
+                button[0]->setEnabled(false);
+            break;
+        case 1:// 大力药水
+            textLabel[i]->setText("大力药水 $3500");
+            pixLabel[i]->setPixmap(prop_1mixmap);
+            if(coin<3500)
+                button[0]->setEnabled(false);
+            break;
+        case 2:// 增加时间
+            textLabel[i]->setText("增加15秒 $5000");
+            pixLabel[i]->setPixmap(prop_2mixmap);
+            if(coin<5000)
+                button[0]->setEnabled(false);
+            break;
+        case 3:// 减半
+            textLabel[i]->setText("时间减半 目标分数减半\n $8000");
+            pixLabel[i]->setPixmap(prop_3mixmap);
+            if(coin<8000)
+                button[0]->setEnabled(false);
+            break;
+        default:
+            break;
+        }
     }
-
-    switch (num2){
-    case 0:// 炸药
-        ui->label_2->setText("炸药 $500");
-        ui->label_6->setPixmap(propmixmap);
-        break;
-    case 1:// 大力药水
-        ui->label_2->setText("大力药水 $2000");
-        ui->label_6->setPixmap(prop_1mixmap);
-        break;
-    case 2:// 增加时间
-        ui->label_2->setText("增加15秒 $1000");
-        ui->label_6->setPixmap(prop_2mixmap);
-        break;
-    case 3:// 减半
-        ui->label_2->setText("时间分数减半 $5000");
-        ui->label_6->setPixmap(prop_3mixmap);
-        break;
-    default:
-        break;
-    }
-
-    switch (num3){
-    case 0:// 炸药
-        ui->label_3->setText("炸药 $500");
-        ui->label_7->setPixmap(propmixmap);
-        break;
-    case 1:// 大力药水
-        ui->label_3->setText("大力药水 $2000");
-        ui->label_7->setPixmap(prop_1mixmap);
-        break;
-    case 2:// 增加时间
-        ui->label_3->setText("增加15秒 $1000");
-        ui->label_7->setPixmap(prop_2mixmap);
-        break;
-    case 3:// 减半
-        ui->label_3->setText("时间分数减半 $5000");
-        ui->label_7->setPixmap(prop_3mixmap);
-        break;
-    default:
-        break;
-    }
-
 }
 
 Shop::~Shop()
@@ -132,30 +103,30 @@ void Shop::on_nextLevelButton_clicked()
     this->hide();
 }
 
-void Shop::on_pushButton_clicked()
+void Shop::buyProp(int id)
 {
-    switch (num1) {
+    switch (id) {
     case 0:// 炸药
-        if (coin >= 500){
-            coin -= 500;
+        if (coin >= 1000){
+            coin -= 1000;
             Bomb::bombNum += 1;
         }
         break;
     case 1:// 增加钩子速度
-        if (coin >= 2000){
-            coin -= 2000;
-            level->hook->multiplier = 1.2;
+        if (coin >= 3500){
+            coin -= 3500;
+            level->hook->multiplier *= 1.2;
         }
         break;
     case 2:// 增加时间
-        if (coin >= 1000){
-            coin -= 1000;
+        if (coin >= 5000){
+            coin -= 5000;
             level->restTime += 15;
         }
         break;
     case 3:// 减半
-        if (coin >= 5000){
-            coin -= 5000;
+        if (coin >= 8000){
+            coin -= 8000;
             level->restTime /= 2;
             level->goalScore /= 2;
             level->ui->goalScoreLabel->setText(QString("目标分数:%1").arg(level->goalScore));
@@ -164,44 +135,19 @@ void Shop::on_pushButton_clicked()
     default:
         break;
     }
+}
+
+void Shop::on_pushButton_clicked()
+{
+    buyProp(num[0]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton->setEnabled(false);
-    num1 = 1e9;
 }
 
 
 void Shop::on_pushButton_2_clicked()
 {
-    switch (num2) {
-    case 0:// 炸药
-        if (coin >= 500){
-            coin -= 500;
-            Bomb::bombNum += 1;
-        }
-        break;
-    case 1:// 增加钩子速度
-        if (coin >= 2000){
-            coin -= 2000;
-            level->hook->multiplier = 1.2;
-        }
-        break;
-    case 2:// 增加时间
-        if (coin >= 1000){
-            coin -= 1000;
-            level->restTime += 15;
-        }
-        break;
-    case 3:// 减半
-        if (coin >= 5000){
-            coin -= 5000;
-            level->restTime /= 2;
-            level->goalScore /= 2;
-            level->ui->goalScoreLabel->setText(QString("目标分数:%1").arg(level->goalScore));
-        }
-        break;
-    default:
-        break;
-    }
+    buyProp(num[1]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_2->setEnabled(false);
 }
@@ -209,36 +155,7 @@ void Shop::on_pushButton_2_clicked()
 
 void Shop::on_pushButton_3_clicked()
 {
-    switch (num3) {
-    case 0:// 炸药
-        if (coin >= 500){
-            coin -= 500;
-            Bomb::bombNum += 1;
-        }
-        break;
-    case 1:// 增加钩子速度
-        if (coin >= 2000){
-            coin -= 2000;
-            level->hook->multiplier = 1.2;
-        }
-        break;
-    case 2:// 增加时间
-        if (coin >= 1000){
-            coin -= 1000;
-            level->restTime += 15;
-        }
-        break;
-    case 3:// 减半
-        if (coin >= 5000){
-            coin -= 5000;
-            level->restTime /= 2;
-            level->goalScore /= 2;
-            level->ui->goalScoreLabel->setText(QString("目标分数:%1").arg(level->goalScore));
-        }
-        break;
-    default:
-        break;
-    }
+    buyProp(num[2]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_3->setEnabled(false);
 }

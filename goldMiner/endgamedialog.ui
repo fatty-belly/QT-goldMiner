@@ -47,13 +47,13 @@
     <string>PushButton</string>
    </property>
   </widget>
-  <widget class="QLabel" name="bombLabel">
+  <widget class="QLabel" name="hintLabel">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>199</y>
-     <width>241</width>
-     <height>31</height>
+     <x>30</x>
+     <y>179</y>
+     <width>341</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">

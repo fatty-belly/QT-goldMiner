@@ -17,7 +17,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
+    minerPixmap("../goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
@@ -35,13 +35,10 @@ Level::Level(QWidget *parent, int levelNum_) :
     switch(levelNum)
     {
     case 1:
-//        generateProps(5);
-//        generateDiamonds(2);
+        //generateProps(5);
+        generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
-        generateTNT(10);
         goalScore = 8000;
-        restTime = 1;
-        score = 100000;
         Bomb::bombNum = 5;
         break;
     case 2:
@@ -54,18 +51,19 @@ Level::Level(QWidget *parent, int levelNum_) :
     case 3:
         generateTimePlus(2);
         generateDiamonds(20);//第三关-钻石关
-        goalScore = 40000;
+        goalScore = 38000;
         restTime = 120;
         break;
     case 4:
         generateTimePlus(2);
-        generateRandomObjects(25,5,true);
-        Bomb::bombNum += 5;//第四关-碎石关
+        generateRandomObjects(20,5,true);//第四关-碎石关
+        generateTNT(3);
         goalScore = 6000;
         break;
     case 5:
         generateTimePlus(2);
         generateSpecialObjects(5);//第五关-雪花关
+        generateTNT(2);
         goalScore = 7000;
         break;
     case 6:
@@ -274,7 +272,7 @@ void Level::generateTNT(int numTNTs){
         {
             flag=true;
             x = QRandomGenerator::global()->bounded(0, 600);
-            y = QRandomGenerator::global()->bounded(200, 400); // 时间道具在比较下面
+            y = QRandomGenerator::global()->bounded(150,350);
             radius = QRandomGenerator::global()->bounded(15, 20);
             for(GameObject* object:gameObjects)
             {
@@ -307,7 +305,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
+    QImage bombImage("../goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -373,12 +371,12 @@ void Level::updateTimer()
         this->close();
         if(score < goalScore)
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,false);
+            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,false);
             endGameDialog->show();
         }
         else
         {
-            EndGameDialog *endGameDialog = new EndGameDialog(score,levelNum,true);
+            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,true);
             endGameDialog->show();
         }
     }

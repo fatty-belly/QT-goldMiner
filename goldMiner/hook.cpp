@@ -8,7 +8,7 @@
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
+    hookPixmap("../goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -20,7 +20,7 @@ Hook::Hook(Ui::Level *u, Level *l):
     position = ui->hookLabel->pos();  // 获取当前位置
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Hook::updateHook);
-    timer->start(50);//50ms更新一次钩子状态
+    timer->start(60);//60ms更新一次钩子状态
 }
 
 void Hook::updateHook()
@@ -40,30 +40,26 @@ void Hook::updateHook()
                     caughtObject = object;
                     extend_direction = false;//往回收
                     speed = caughtObject->hookSpeed;//抓取物体后速度变化了
-
-                    // 钩到TNT
-                    if (caughtObject->type == GameObject::Type::TNT){
-
-                        for(GameObject* vanishobject:level->gameObjects)//逐个遍历所有物体
-                        {
-                            if (pow(vanishobject->position.x() - caughtObject->position.x(),2) +
-                                    pow(vanishobject->position.y() - caughtObject->position.y(), 2) <= 10000){
-                                if (vanishobject != caughtObject){
-                                    level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),vanishobject));
-                                }
-
-                            }
-                        }
-                        Bomb::bombImageTime = 2;
-                        Bomb::bombImagePosition = caughtObject->position;//炸弹位置是抓取的物体的位置
-                        level->update();
-                        level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
-                        caughtObject =  NULL;
-                        speed = 5;//以上为把物体删除的操作
-                    }
-                    break;
                 }
             }
+        }
+        // 钩到TNT
+        if (caughtObject && caughtObject->type == GameObject::Type::TNT){
+            for(auto it = level->gameObjects.begin();it!=level->gameObjects.end();it++)//逐个遍历所有物体
+            {
+                if (pow((*it)->position.x() - caughtObject->position.x(),2) +
+                        pow((*it)->position.y() - caughtObject->position.y(), 2) <= 10000){
+                    if ((*it) != caughtObject){
+                        it = level->gameObjects.erase(it);
+                    }
+                }
+            }
+            Bomb::bombImageTime = 2;
+            Bomb::bombImagePosition = caughtObject->position;//炸弹位置是抓取的物体的位置
+            level->gameObjects.erase(find(level->gameObjects.begin(),level->gameObjects.end(),caughtObject));
+            caughtObject = NULL;
+            level->update();
+            speed = 5;//以上为把物体删除的操作
         }
 
         if (extend_direction && (position.x() < -30 || position.x() > 650 || position.y() > 390))
