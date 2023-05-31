@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>300</height>
+    <width>752</width>
+    <height>426</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>180</y>
+     <y>270</y>
      <width>80</width>
      <height>31</height>
     </rect>
@@ -46,7 +46,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>180</y>
+     <y>270</y>
      <width>80</width>
      <height>31</height>
     </rect>
@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>180</y>
+     <y>270</y>
      <width>80</width>
      <height>31</height>
     </rect>
@@ -92,7 +92,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>210</y>
+     <y>320</y>
      <width>141</width>
      <height>51</height>
     </rect>
@@ -111,7 +111,7 @@
    <property name="geometry">
     <rect>
      <x>160</x>
-     <y>210</y>
+     <y>320</y>
      <width>141</width>
      <height>51</height>
     </rect>
@@ -130,7 +130,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>210</y>
+     <y>320</y>
      <width>141</width>
      <height>51</height>
     </rect>
@@ -148,11 +148,17 @@
   <widget class="QPushButton" name="nextLevelButton">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>350</x>
      <y>20</y>
-     <width>80</width>
-     <height>31</height>
+     <width>91</width>
+     <height>71</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Academy Engraved LET</family>
+     <pointsize>18</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>下一关</string>
@@ -162,10 +168,16 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>20</y>
+     <y>40</y>
      <width>91</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Academy Engraved LET</family>
+     <pointsize>18</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>商店</string>
@@ -175,10 +187,16 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
-     <width>121</width>
-     <height>31</height>
+     <y>40</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Academy Engraved LET</family>
+     <pointsize>18</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -188,7 +206,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>80</y>
+     <y>140</y>
      <width>81</width>
      <height>81</height>
     </rect>
@@ -207,7 +225,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>80</y>
+     <y>140</y>
      <width>81</width>
      <height>81</height>
     </rect>
@@ -226,7 +244,7 @@
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>80</y>
+     <y>140</y>
      <width>81</width>
      <height>81</height>
     </rect>
@@ -242,6 +260,19 @@
    </property>
    <property name="wordWrap">
     <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>0</y>
+     <width>221</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

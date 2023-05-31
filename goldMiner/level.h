@@ -33,6 +33,9 @@ public:
     int goalScore;
     Ui::Level *ui;
     QSoundEffect* player;
+    QSoundEffect *goalplayer;
+
+    bool goal_play_once;
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;

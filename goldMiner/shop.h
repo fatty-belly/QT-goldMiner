@@ -22,7 +22,13 @@ public:
     Level * level;
     void buyProp(int id);
     void modifyButton();
-    QSoundEffect *player;
+    QSoundEffect *shop_bgm_player;
+    QSoundEffect *Dave1_player;
+    QSoundEffect *Dave2_player;
+    QSoundEffect *Dave3_player;
+    QSoundEffect *Dave4_player;
+    QSoundEffect *Dave5_player;
+
 
 private slots:
     void on_nextLevelButton_clicked();
@@ -41,6 +47,7 @@ private:
     QPixmap prop_1mixmap;
     QPixmap prop_2mixmap;
     QPixmap prop_3mixmap;
+    QPixmap Davemixmap;
 };
 
 #endif // SHOP_H

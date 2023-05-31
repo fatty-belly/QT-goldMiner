@@ -11,10 +11,11 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("../goldMiner/Images/TNT.png"),
-    prop_1mixmap("../goldMiner/Images/+.png"),
-    prop_2mixmap("../goldMiner/Images/time.png"),
-    prop_3mixmap("../goldMiner/Images/bag.png")
+    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
+    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
+    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
+    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png"),
+    Davemixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/CrazyDave.png")
 {
     coin += coin_;
     numProp = 4;
@@ -23,10 +24,17 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     level= new Level(nullptr, levelNum);
 
     // 播放BGM
-    player = new QSoundEffect;
-    player->setSource(QUrl::fromLocalFile("../goldMiner/Music/shop_bgm.wav"));
-    player->setLoopCount(QSoundEffect::Infinite);
-    player->play();
+    shop_bgm_player = new QSoundEffect(this);
+    shop_bgm_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop_bgm.wav"));
+    shop_bgm_player->setLoopCount(QSoundEffect::Infinite);
+    shop_bgm_player->setVolume(1);
+    shop_bgm_player->play();
+
+    Dave3_player = new QSoundEffect(this);
+    Dave3_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak3.wav"));
+    Dave3_player->setLoopCount(1);
+    Dave3_player->play();
+
     // 产生三个随机数
     int index = 0;
     while (true){
@@ -58,6 +66,8 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     prop_1mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_2mixmap.scaled(20,20,Qt::KeepAspectRatio);
     prop_3mixmap.scaled(20,20,Qt::KeepAspectRatio);
+
+    ui->label_8->setPixmap(Davemixmap);
     QLabel* textLabel[3] = {ui->label,ui->label_2,ui->label_3};
     QLabel* pixLabel[3] = {ui->label_5,ui->label_6,ui->label_7};
     QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};
@@ -104,7 +114,7 @@ void Shop::on_nextLevelButton_clicked()
     QTimer *gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, level, &Level::updateTimer);
     gameTimer->start(1000);
-    player->stop();
+    shop_bgm_player->stop();
     level->show();
     level->player->play();
     this->hide();
@@ -174,6 +184,10 @@ void Shop::modifyButton()
 
 void Shop::on_pushButton_clicked()
 {
+    Dave1_player = new QSoundEffect(this);
+    Dave1_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak1.wav"));
+    Dave1_player->setLoopCount(1);
+    Dave1_player->play();
     buyProp(num[0]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton->setEnabled(false);
@@ -182,6 +196,10 @@ void Shop::on_pushButton_clicked()
 
 void Shop::on_pushButton_2_clicked()
 {
+    Dave5_player = new QSoundEffect(this);
+    Dave5_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak5.wav"));
+    Dave5_player->setLoopCount(1);
+    Dave5_player->play();
     buyProp(num[1]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_2->setEnabled(false);
@@ -191,6 +209,10 @@ void Shop::on_pushButton_2_clicked()
 
 void Shop::on_pushButton_3_clicked()
 {
+    Dave4_player = new QSoundEffect(this);
+    Dave4_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak4.wav"));
+    Dave4_player->setLoopCount(1);
+    Dave4_player->play();
     buyProp(num[2]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_3->setEnabled(false);

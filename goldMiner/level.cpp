@@ -19,7 +19,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
+    minerPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
@@ -28,10 +28,11 @@ Level::Level(QWidget *parent, int levelNum_) :
     StrengthDownTimeDeq.clear();
     StrengthUpTimeDeq.clear();
     hook = new Hook(ui, this);
+    goal_play_once = true;
 
     // 添加BGM
-    player = new QSoundEffect;
-    player->setSource(QUrl::fromLocalFile("../goldMiner/Music/level_bgm.wav"));
+    player = new QSoundEffect(this);
+//    player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/level_bgm.wav"));
     player->setLoopCount(QSoundEffect::Infinite);
 
     if (levelNum == 1)
@@ -44,7 +45,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     {
     case 1:
         generateProps(5);
-        generateDiamonds(2);
+        generateDiamonds(10);
         generateRandomObjects(8,10);//第一关-正常关
         goalScore = 8000;
         Bomb::bombNum = 5;
@@ -315,7 +316,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("../goldMiner/Images/bomb.png");
+    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -338,6 +339,13 @@ void Level::paintEvent(QPaintEvent* event)
 
 void Level::updateTimer()
 {
+    if (score >= goalScore && goal_play_once){
+        goalplayer = new QSoundEffect(this);
+        goalplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/起飞.wav"));
+        goalplayer->setLoopCount(1);
+        goalplayer->play();
+        goal_play_once = false;
+    }
     restTime--;
     std::deque<int>::iterator i;
     if (!StrengthUpTimeDeq.empty())
