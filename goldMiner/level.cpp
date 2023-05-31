@@ -32,8 +32,9 @@ Level::Level(QWidget *parent, int levelNum_) :
 
     // 添加BGM
     player = new QSoundEffect(this);
-//    player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/level_bgm.wav"));
+    player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/level_bgm.wav"));
     player->setLoopCount(QSoundEffect::Infinite);
+    player->setVolume(0.4);
 
     if (levelNum == 1)
     {
