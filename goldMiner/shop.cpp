@@ -4,6 +4,7 @@
 #include "ui_shop.h"
 #include <bomb.h>
 #include <QRandomGenerator>
+#include <QThread>
 
 
 int Shop::coin=0;
@@ -11,11 +12,11 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
-    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
-    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
-    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png"),
-    Davemixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/CrazyDave.png")
+    propmixmap("../goldMiner/Images/TNT.png"),
+    prop_1mixmap("../goldMiner/Images/+.png"),
+    prop_2mixmap("../goldMiner/Images/time.png"),
+    prop_3mixmap("../goldMiner/Images/bag.png"),
+    Davemixmap("../goldMiner/Images/CrazyDave.png")
 {
     coin += coin_;
     numProp = 4;
@@ -25,15 +26,16 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
 
     // 播放BGM
     shop_bgm_player = new QSoundEffect(this);
-    shop_bgm_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop_bgm.wav"));
+    shop_bgm_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/shop_bgm.wav"));
     shop_bgm_player->setLoopCount(QSoundEffect::Infinite);
     shop_bgm_player->setVolume(1);
     shop_bgm_player->play();
 
-    Dave3_player = new QSoundEffect(this);
-    Dave3_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak3.wav"));
-    Dave3_player->setLoopCount(1);
-    Dave3_player->play();
+    Dave_player = new QSoundEffect(this);
+
+    QTimer *Timer = new QTimer(this);
+    connect(Timer, &QTimer::timeout, this, &Shop::updateTimer);
+    Timer->start(1000);
 
     // 产生三个随机数
     int index = 0;
@@ -70,7 +72,7 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     ui->label_8->setPixmap(Davemixmap);
     QLabel* textLabel[3] = {ui->label,ui->label_2,ui->label_3};
     QLabel* pixLabel[3] = {ui->label_5,ui->label_6,ui->label_7};
-    QPushButton* button[3] ={ui->pushButton,ui->pushButton_2,ui->pushButton_3};
+    QPushButton* button[3] = {ui->pushButton,ui->pushButton_2,ui->pushButton_3};
     for(int i=0;i<3;i++)
     {
         switch (num[i]){
@@ -107,6 +109,49 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
 Shop::~Shop()
 {
     delete ui;
+}
+
+void Shop::start()
+{
+    if(levelNum == 2)
+    {
+        Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak3.wav"));
+        Dave_player->setLoopCount(1);
+        Dave_player->play();
+        ui->daveLabel->setText("你好，我的邻居");
+    }
+    else
+    {
+        Dave_player = new QSoundEffect(this);
+        Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak3.wav"));
+        Dave_player->setLoopCount(1);
+        Dave_player->play();
+        ui->daveLabel->setText("买点东西吧");
+    }
+}
+
+void Shop::updateTimer()
+{
+    elaspedTime += 1;
+    if(levelNum == 2)
+    {
+        if(elaspedTime == 2)
+        {
+            Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak4.wav"));
+            Dave_player->play();
+            ui->daveLabel->setText("为什么我会在\n地下开商店?");
+        }
+        if(elaspedTime == 4)
+        {
+            Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak1.wav"));
+            Dave_player->play();
+            ui->daveLabel->setText("因为我疯了!");
+        }
+        if(elaspedTime == 6)
+        {
+            ui->daveLabel->setText("买点东西吧");
+        }
+    }
 }
 
 void Shop::on_nextLevelButton_clicked()
@@ -182,12 +227,30 @@ void Shop::modifyButton()
     }
 }
 
+void Shop::setDaveText(int num)
+{
+    switch(num)
+    {
+    case 0:
+        ui->daveLabel->setText("砰砰砰!!!");
+        break;
+    case 1:
+        ui->daveLabel->setText("这个药水的原料\n是我家花园的植物");
+        break;
+    case 2:
+        ui->daveLabel->setText("你居然要用金钱\n换时间,你是不是在\n和魔鬼做交易!");
+        break;
+    case 3:
+        ui->daveLabel->setText("为什么会有人\n要半份的关卡?");
+        break;
+    }
+}
+
 void Shop::on_pushButton_clicked()
 {
-    Dave1_player = new QSoundEffect(this);
-    Dave1_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak1.wav"));
-    Dave1_player->setLoopCount(1);
-    Dave1_player->play();
+    Dave_player->setSource(QUrl::fromLocalFile(daveSpeak[num[0]]));
+    Dave_player->play();
+    setDaveText(num[0]);
     buyProp(num[0]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton->setEnabled(false);
@@ -196,10 +259,9 @@ void Shop::on_pushButton_clicked()
 
 void Shop::on_pushButton_2_clicked()
 {
-    Dave5_player = new QSoundEffect(this);
-    Dave5_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak5.wav"));
-    Dave5_player->setLoopCount(1);
-    Dave5_player->play();
+    Dave_player->setSource(QUrl::fromLocalFile(daveSpeak[num[1]]));
+    Dave_player->play();
+    setDaveText(num[1]);
     buyProp(num[1]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_2->setEnabled(false);
@@ -209,10 +271,9 @@ void Shop::on_pushButton_2_clicked()
 
 void Shop::on_pushButton_3_clicked()
 {
-    Dave4_player = new QSoundEffect(this);
-    Dave4_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak4.wav"));
-    Dave4_player->setLoopCount(1);
-    Dave4_player->play();
+    Dave_player->setSource(QUrl::fromLocalFile(daveSpeak[num[2]]));
+    Dave_player->play();
+    setDaveText(num[2]);
     buyProp(num[2]);
     ui->coinLabel->setText(QString("金币数量:%1").arg(coin));
     ui->pushButton_3->setEnabled(false);

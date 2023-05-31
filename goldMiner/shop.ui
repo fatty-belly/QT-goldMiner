@@ -148,7 +148,7 @@
   <widget class="QPushButton" name="nextLevelButton">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>270</x>
      <y>20</y>
      <width>91</width>
      <height>71</height>
@@ -167,8 +167,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>40</y>
+     <x>180</x>
+     <y>30</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -186,16 +186,16 @@
   <widget class="QLabel" name="coinLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>141</width>
+     <x>20</x>
+     <y>30</y>
+     <width>151</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Academy Engraved LET</family>
-     <pointsize>18</pointsize>
+     <family>Microsoft YaHei UI</family>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
@@ -273,6 +273,35 @@
    </property>
    <property name="text">
     <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="daveLabel">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>0</y>
+     <width>191</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(&quot;../goldMiner/Images/bubble.png&quot;);
+</string>
+   </property>
+   <property name="text">
+    <string>为什么我会在这里？
+因为我疯了！</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

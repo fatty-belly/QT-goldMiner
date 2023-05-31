@@ -8,7 +8,7 @@
 Hook::Hook(Ui::Level *u, Level *l):
     ui(u),
     level(l),
-    hookPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/hook.png"),
+    hookPixmap("../goldMiner/Images/hook.png"),
     angel(0),
     clockwise(false),
     hookExtended(false),
@@ -26,60 +26,62 @@ Hook::Hook(Ui::Level *u, Level *l):
     bomb_play_once = true;
 
     goldplayer = new QSoundEffect(this);
-    goldplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/gold.wav"));
+    goldplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/gold.wav"));
     goldplayer->setLoopCount(1);
 
     bombplayer = new QSoundEffect(this);
-    bombplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/TNT.wav"));
+    bombplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/TNT.wav"));
     bombplayer->setLoopCount(1);
 
     bagplayer = new QSoundEffect(this);
-    bagplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/bag.wav"));
+    bagplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/bag.wav"));
     bagplayer->setLoopCount(1);
 
     pickstoneplayer = new QSoundEffect(this);
-    pickstoneplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/pickstone.wav"));
+    pickstoneplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/pickstone.wav"));
     pickstoneplayer->setLoopCount(1);
 
     pickbombplayer = new QSoundEffect(this);
-    pickbombplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/pickbomb.wav"));
+    pickbombplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/pickbomb.wav"));
     pickbombplayer->setLoopCount(1);
 
     hookfailplayer = new QSoundEffect(this);
-    hookfailplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/走位.wav"));
+    hookfailplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/走位.wav"));
     hookfailplayer->setLoopCount(1);
 
     stoneplayer = new QSoundEffect(this);
-    stoneplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/stone.wav"));
+    stoneplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/stone.wav"));
     stoneplayer->setLoopCount(1);
 
     diamondplayer = new QSoundEffect(this);
-    diamondplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/diamond.wav"));
+    diamondplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/diamond.wav"));
     diamondplayer->setLoopCount(1);
 
     strengupplayer = new QSoundEffect(this);
-    strengupplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/strengup.wav"));
+    strengupplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/strengup.wav"));
     strengupplayer->setLoopCount(1);
 
     strengdownplayer = new QSoundEffect(this);
-    strengdownplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/strengdown.wav"));
+    strengdownplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/strengdown.wav"));
     strengdownplayer->setLoopCount(1);
 
     timeplusplayer = new QSoundEffect(this);
-    timeplusplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/timeplus.wav"));
+    timeplusplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/timeplus.wav"));
     timeplusplayer->setLoopCount(1);
 
     hookstartplayer = new QSoundEffect(this);
-    hookstartplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/hook.wav"));
+    hookstartplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/hook.wav"));
     hookstartplayer->setLoopCount(1);
 
     bombplayer = new QSoundEffect(this);
-    bombplayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/TNT.wav"));
+    bombplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/TNT.wav"));
     bombplayer->setLoopCount(1);
 }
 
 void Hook::updateHook()
 {
+    if(level->restTime <= 0)
+        return;
     if(hookExtended)
     {
         // 钩到TNT

@@ -64,6 +64,7 @@ void EndGameDialog::on_pushButton_clicked()
     {
         Shop *shop = new Shop(addCoin, nullptr,levelNum + 1);
         shop->show();
+        shop->start();
     }
     close();
 }

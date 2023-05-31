@@ -19,15 +19,18 @@ public:
     ~Shop();
     static int coin;
     int numProp,num[3];
+    QString daveSpeak[4] = {"../goldMiner/Music/DaveSpeak1.wav",
+                              "../goldMiner/Music/DaveSpeak5.wav",
+                              "../goldMiner/Music/DaveSpeak2.wav",
+                              "../goldMiner/Music/DaveSpeak5.wav"};
     Level * level;
     void buyProp(int id);
+    void setDaveText(int num);
     void modifyButton();
+    void start();
     QSoundEffect *shop_bgm_player;
-    QSoundEffect *Dave1_player;
-    QSoundEffect *Dave2_player;
-    QSoundEffect *Dave3_player;
-    QSoundEffect *Dave4_player;
-    QSoundEffect *Dave5_player;
+    QSoundEffect *Dave_player;
+
 
 
 private slots:
@@ -48,6 +51,8 @@ private:
     QPixmap prop_2mixmap;
     QPixmap prop_3mixmap;
     QPixmap Davemixmap;
+    void updateTimer();
+    int elaspedTime = 0;
 };
 
 #endif // SHOP_H

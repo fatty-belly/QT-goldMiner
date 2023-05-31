@@ -2,6 +2,7 @@
 #define ENDGAMEDIALOG_H
 
 #include "qabstractbutton.h"
+#include "qsoundeffect.h"
 #include <QDialog>
 
 namespace Ui {
