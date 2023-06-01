@@ -1,7 +1,6 @@
 #ifndef ENDGAMEDIALOG_H
 #define ENDGAMEDIALOG_H
 
-#include "qabstractbutton.h"
 #include "qsoundeffect.h"
 #include <QDialog>
 
@@ -14,8 +13,7 @@ class EndGameDialog : public QDialog
     Q_OBJECT
 
 public:
-    friend class Level;
-    explicit EndGameDialog(int addCoin_, int levelNum_, bool win_, QSoundEffect * level_player_);
+    explicit EndGameDialog(int addCoin_, int levelNum_, bool win_);
     ~EndGameDialog();
 
 private slots:
@@ -26,7 +24,7 @@ private:
     int levelNum;
     bool win;
     int addCoin;
-    QSoundEffect *level_player;
+    QSoundEffect* endPlayer = new QSoundEffect();
 };
 
 #endif // ENDGAMEDIALOG_H

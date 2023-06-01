@@ -19,10 +19,10 @@ public:
     ~Shop();
     static int coin;
     int numProp,num[3];
-    QString daveSpeak[4] = {"/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak1.wav",
-                              "/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak5.wav",
-                              "/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak2.wav",
-                              "/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak5.wav"};
+    QString daveSpeak[4] = {"../goldMiner/Music/DaveSpeak1.wav",
+                              "../goldMiner/Music/DaveSpeak5.wav",
+                              "../goldMiner/Music/DaveSpeak2.wav",
+                              "../goldMiner/Music/DaveSpeak5.wav"};
     Level * level;
     void buyProp(int id);
     void setDaveText(int num);

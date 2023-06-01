@@ -22,7 +22,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     levelNum(levelNum_)
 {
     ui->setupUi(this);
-    ui->minerLabel->setPixmap(QPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer1.png"));
+    ui->minerLabel->setPixmap(QPixmap("../goldMiner/Images/goldminer1.png"));
     gameObjects.clear();
     StrengthDownTimeDeq.clear();
     StrengthUpTimeDeq.clear();
@@ -31,7 +31,7 @@ Level::Level(QWidget *parent, int levelNum_) :
 
     // 添加BGM
     player = new QSoundEffect();
-    player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/level_bgm.wav"));
+    player->setSource(QUrl::fromLocalFile("../goldMiner/Music/level_bgm.wav"));
     player->setLoopCount(QSoundEffect::Infinite);
     player->stop();
     timePlayer = new QSoundEffect();
@@ -51,6 +51,8 @@ Level::Level(QWidget *parent, int levelNum_) :
         generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
         goalScore = 8000;
+        score = 12000;
+        restTime = 5;
         Bomb::bombNum = 5;
         break;
     case 2:
@@ -92,13 +94,16 @@ Level::Level(QWidget *parent, int levelNum_) :
 
 void Level::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Down)
+    if(hook)
     {
-        hook->extend();//按↓键伸钩子
-    }
-    if(event->key() == Qt::Key_Up)
-    {
-        hook->bomb();//按↑键扔炸药
+        if (event->key() == Qt::Key_Down)
+        {
+            hook->extend();//按↓键伸钩子
+        }
+        if(event->key() == Qt::Key_Up)
+        {
+            hook->bomb();//按↑键扔炸药
+        }
     }
 }
 
@@ -319,7 +324,7 @@ void Level::drawLine()
 
 void Level::drawBombImage()
 {
-    QImage bombImage("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bomb.png");
+    QImage bombImage("../goldMiner/Images/bomb.png");
     bombImage = bombImage.scaled(ui->hookLabel->width()/2,ui->hookLabel->height()/2);//设置图片大小
     QPainter painter(this);
     painter.drawImage(
@@ -342,7 +347,7 @@ void Level::paintEvent(QPaintEvent* event)
 void Level::updateTimer()
 {
     if (score >= goalScore && goal_play_once){
-        goalPlayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/起飞.wav"));
+        goalPlayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/起飞.wav"));
         goalPlayer->setLoopCount(1);
         goalPlayer->play();
         goal_play_once = false;
@@ -376,7 +381,7 @@ void Level::updateTimer()
     update();
     if(restTime == 10)
     {
-        timePlayer->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/time.wav"));
+        timePlayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/time.wav"));
         timePlayer->setLoopCount(2);
         timePlayer->play();
     }
@@ -401,18 +406,12 @@ void Level::updateTimer()
         hook->timeplusPlayer->stop();
         if(score < goalScore)
         {
-            player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/lose.wav"));
-            player->setLoopCount(1);
-            player->play();
-            EndGameDialog *endGameDialog = new EndGameDialog(0, levelNum, false, player);
+            EndGameDialog *endGameDialog = new EndGameDialog(0, levelNum, false);
             endGameDialog->show();
         }
         else
         {
-            player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/win.wav"));
-            player->setLoopCount(1);
-            player->play();
-            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore, levelNum,true, player);
+            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore, levelNum,true);
             endGameDialog->show();
         }
         hook = NULL;

@@ -290,7 +290,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(&quot;/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bubble.png&quot;);
+    <string notr="true">background-image: url(&quot;../goldMiner/Images/bubble.png&quot;);
 </string>
    </property>
    <property name="text">
