@@ -3,11 +3,12 @@
 #include "shop.h"
 #include "ui_endgamedialog.h"
 
-EndGameDialog::EndGameDialog(int addCoin_, int levelNum_, bool win_) :
+EndGameDialog::EndGameDialog(int addCoin_, int levelNum_, bool win_, QSoundEffect * level_player_) :
     ui(new Ui::EndGameDialog),
     levelNum(levelNum_),
     win(win_),
-    addCoin(addCoin_)
+    addCoin(addCoin_),
+    level_player(level_player_)
 {
     ui->setupUi(this);
     if(!win)
@@ -62,6 +63,9 @@ void EndGameDialog::on_pushButton_clicked()
 {
     if(win && levelNum < Level::totalLevelNum)
     {
+        if (level_player->isPlaying()){
+            level_player->stop();
+        }
         Shop *shop = new Shop(addCoin, nullptr,levelNum + 1);
         shop->show();
         shop->start();

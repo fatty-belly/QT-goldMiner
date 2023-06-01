@@ -12,11 +12,11 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     QWidget(parent),
     ui(new Ui::Shop),
     levelNum(levelNum_),
-    propmixmap("../goldMiner/Images/TNT.png"),
-    prop_1mixmap("../goldMiner/Images/+.png"),
-    prop_2mixmap("../goldMiner/Images/time.png"),
-    prop_3mixmap("../goldMiner/Images/bag.png"),
-    Davemixmap("../goldMiner/Images/CrazyDave.png")
+    propmixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/TNT.png"),
+    prop_1mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/+.png"),
+    prop_2mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/time.png"),
+    prop_3mixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/bag.png"),
+    Davemixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/CrazyDave.png")
 {
     coin += coin_;
     numProp = 4;
@@ -26,7 +26,7 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
 
     // 播放BGM
     shop_bgm_player = new QSoundEffect(this);
-    shop_bgm_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/shop_bgm.wav"));
+    shop_bgm_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/shop_bgm.wav"));
     shop_bgm_player->setLoopCount(QSoundEffect::Infinite);
     shop_bgm_player->play();
 
@@ -114,7 +114,7 @@ void Shop::start()
 {
     if(levelNum == 2)
     {
-        Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak3.wav"));
+        Dave_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak3.wav"));
         Dave_player->setLoopCount(1);
         Dave_player->play();
         ui->daveLabel->setText("你好，我的邻居");
@@ -122,7 +122,7 @@ void Shop::start()
     else
     {
         Dave_player = new QSoundEffect(this);
-        Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak3.wav"));
+        Dave_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak3.wav"));
         Dave_player->setLoopCount(1);
         Dave_player->play();
         ui->daveLabel->setText("买点东西吧");
@@ -136,13 +136,13 @@ void Shop::updateTimer()
     {
         if(elaspedTime == 2)
         {
-            Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak4.wav"));
+            Dave_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak4.wav"));
             Dave_player->play();
             ui->daveLabel->setText("为什么我会在\n地下开商店?");
         }
         if(elaspedTime == 4)
         {
-            Dave_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/DaveSpeak1.wav"));
+            Dave_player->setSource(QUrl::fromLocalFile("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Music/DaveSpeak1.wav"));
             Dave_player->play();
             ui->daveLabel->setText("因为我疯了!");
         }

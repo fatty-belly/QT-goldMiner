@@ -17,7 +17,7 @@ class Ui_Level(object):
         Level.resize(719, 455)
         Level.setStyleSheet("")
         self.minerLabel = QtWidgets.QLabel(Level)
-        self.minerLabel.setGeometry(QtCore.QRect(320, 10, 91, 81))
+        self.minerLabel.setGeometry(QtCore.QRect(330, 20, 81, 61))
         self.minerLabel.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
         self.minerLabel.setText("")
         self.minerLabel.setPixmap(QtGui.QPixmap("/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/goldminer.png"))
@@ -176,7 +176,7 @@ class Ui_Level(object):
         self.bombNumLabel.setObjectName("bombNumLabel")
         self.backgroundWidget = QtWidgets.QWidget(Level)
         self.backgroundWidget.setGeometry(QtCore.QRect(0, 0, 719, 455))
-        self.backgroundWidget.setStyleSheet("#backgroundWidget{background-image: url(\"/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/background.png\");}\n"
+        self.backgroundWidget.setStyleSheet("#backgroundWidget{background-image: url(\"../goldMiner/Images/background.png\");}\n"
 "")
         self.backgroundWidget.setObjectName("backgroundWidget")
         self.scoreLabel = QtWidgets.QLabel(self.backgroundWidget)

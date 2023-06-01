@@ -14,7 +14,8 @@ class EndGameDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EndGameDialog(int addCoin_, int levelNum_, bool win_);
+    friend class Level;
+    explicit EndGameDialog(int addCoin_, int levelNum_, bool win_, QSoundEffect * level_player_);
     ~EndGameDialog();
 
 private slots:
@@ -25,6 +26,7 @@ private:
     int levelNum;
     bool win;
     int addCoin;
+    QSoundEffect *level_player;
 };
 
 #endif // ENDGAMEDIALOG_H

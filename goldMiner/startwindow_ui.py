@@ -17,12 +17,12 @@ class Ui_StartWindow(object):
         StartWindow.setEnabled(True)
         StartWindow.resize(1308, 1149)
         self.centralwidget = QtWidgets.QWidget(StartWindow)
-        self.centralwidget.setStyleSheet("background-image: url(\"/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/begin.png\");\n"
+        self.centralwidget.setStyleSheet("background-image: url(\"../goldMiner/Images/begin.png\");\n"
 "")
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(650, 280, 501, 211))
-        self.pushButton.setStyleSheet("background-image: url(\"/Users/zhaohaonan/Desktop/北大资料/Coding/C++/程序设计实习/QT-goldMiner/goldMiner/Images/start.png\");\n"
+        self.pushButton.setStyleSheet("background-image: url(\"../goldMiner/Images/start.png\");\n"
 "")
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
