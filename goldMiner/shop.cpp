@@ -154,9 +154,7 @@ void Shop::updateTimer()
 
 void Shop::on_nextLevelButton_clicked()
 {
-    QTimer *gameTimer = new QTimer(this);
-    connect(gameTimer, &QTimer::timeout, level, &Level::updateTimer);
-    gameTimer->start(1000);
+    level->gameTimer->start(1000);
     shop_bgm_player->stop();
     elaspedTime = 10;
     Dave_player->stop();

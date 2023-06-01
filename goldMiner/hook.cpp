@@ -18,9 +18,8 @@ Hook::Hook(Ui::Level *u, Level *l):
 {
     ui->hookLabel->setPixmap(hookPixmap);
     position = ui->hookLabel->pos();  // 获取当前位置
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Hook::updateHook);
-    timer->start(60);//60ms更新一次钩子状态
+    connect(hookTimer, &QTimer::timeout, this, &Hook::updateHook);
+    hookTimer->start(60);//60ms更新一次钩子状态
     stone_play_once = true;
     bag_play_once = true;
     bomb_play_once = true;

@@ -28,6 +28,7 @@ public:
     static int totalLevelNum;//总共关卡的数量
     void updateTimer();//倒计时
     int restTime;//剩余时间
+    QTimer* gameTimer = new QTimer();
     std::deque<int> StrengthUpTimeDeq,StrengthDownTimeDeq;
     Hook* hook = NULL;
     int goalScore;
@@ -53,6 +54,7 @@ protected:
 
 private:
     int levelNum;//第几关
+
 };
 
 #endif // LEVEL_H

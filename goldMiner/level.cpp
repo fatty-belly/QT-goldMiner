@@ -28,6 +28,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     StrengthUpTimeDeq.clear();
     hook = new Hook(ui, this);
     goal_play_once = true;
+    connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
 
     // 添加BGM
     player = new QSoundEffect();
@@ -40,8 +41,6 @@ Level::Level(QWidget *parent, int levelNum_) :
 
     if (levelNum == 1)
     {
-        QTimer *gameTimer = new QTimer(this);
-        connect(gameTimer, &QTimer::timeout, this, &Level::updateTimer);
         gameTimer->start(1000);
     }
     switch(levelNum)
@@ -51,8 +50,6 @@ Level::Level(QWidget *parent, int levelNum_) :
         generateDiamonds(2);
         generateRandomObjects(8,10);//第一关-正常关
         goalScore = 8000;
-        score = 12000;
-        restTime = 5;
         Bomb::bombNum = 5;
         break;
     case 2:
@@ -414,8 +411,10 @@ void Level::updateTimer()
             EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore, levelNum,true);
             endGameDialog->show();
         }
+        hook->hookTimer->stop();
         hook = NULL;
         this->close();
+        gameTimer->stop();
     }
 }
 
