@@ -33,8 +33,7 @@ public:
     int goalScore;
     Ui::Level *ui;
     QSoundEffect* player;
-    QSoundEffect *goalplayer;
-
+    QSoundEffect *goalPlayer,*timePlayer;
     bool goal_play_once;
 
 protected:
@@ -53,7 +52,6 @@ protected:
 
 
 private:
-    QPixmap minerPixmap;
     int levelNum;//第几关
 };
 

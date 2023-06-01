@@ -21,19 +21,18 @@ public:
     GameObject* caughtObject = NULL;//钩子抓取到的物体
     double multiplier = 1.2;
 
-    QSoundEffect *bombplayer;
-    QSoundEffect *goldplayer;
-    QSoundEffect *diamondplayer;
-    QSoundEffect *bagplayer;
-    QSoundEffect *stoneplayer;
-    QSoundEffect *pickstoneplayer;
-    QSoundEffect *strengupplayer;
-    QSoundEffect *strengdownplayer;
-    QSoundEffect *timeplusplayer;
-    QSoundEffect *goalplayer;
-    QSoundEffect *hookstartplayer;
-    QSoundEffect *hookfailplayer;
-    QSoundEffect *pickbombplayer;
+    QSoundEffect *bombPlayer;
+    QSoundEffect *goldPlayer;
+    QSoundEffect *diamondPlayer;
+    QSoundEffect *bagPlayer;
+    QSoundEffect *stonePlayer;
+    QSoundEffect *pickstonePlayer;
+    QSoundEffect *strengthupPlayer;
+    QSoundEffect *strengthdownPlayer;
+    QSoundEffect *timeplusPlayer;
+    QSoundEffect *hookstartPlayer;
+    QSoundEffect *hookfailPlayer;
+    QSoundEffect *pickbombPlayer;
 
     bool stone_play_once;
     bool bag_play_once;

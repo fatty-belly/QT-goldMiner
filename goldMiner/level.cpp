@@ -19,11 +19,10 @@ Level::Level(QWidget *parent, int levelNum_) :
     score(0),
     restTime(90),
     ui(new Ui::Level),
-    minerPixmap("../goldMiner/Images/goldminer.png"),
     levelNum(levelNum_)
 {
     ui->setupUi(this);
-    ui->minerLabel->setPixmap(minerPixmap);
+    ui->minerLabel->setPixmap(QPixmap("../goldMiner/Images/goldminer1.png"));
     gameObjects.clear();
     StrengthDownTimeDeq.clear();
     StrengthUpTimeDeq.clear();
@@ -31,10 +30,12 @@ Level::Level(QWidget *parent, int levelNum_) :
     goal_play_once = true;
 
     // 添加BGM
-    player = new QSoundEffect(this);
+    player = new QSoundEffect();
     player->setSource(QUrl::fromLocalFile("../goldMiner/Music/level_bgm.wav"));
     player->setLoopCount(QSoundEffect::Infinite);
-    player->setVolume(0.4);
+    player->stop();
+    timePlayer = new QSoundEffect();
+    //player->setVolume(0.4);
 
     if (levelNum == 1)
     {
@@ -340,10 +341,10 @@ void Level::paintEvent(QPaintEvent* event)
 void Level::updateTimer()
 {
     if (score >= goalScore && goal_play_once){
-        goalplayer = new QSoundEffect(this);
-        goalplayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/起飞.wav"));
-        goalplayer->setLoopCount(1);
-        goalplayer->play();
+        goalPlayer = new QSoundEffect();
+        goalPlayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/起飞.wav"));
+        goalPlayer->setLoopCount(1);
+        goalPlayer->play();
         goal_play_once = false;
     }
     restTime--;
@@ -373,10 +374,31 @@ void Level::updateTimer()
         Bomb::bombImageTime--;
     ui->timeLabel->setText(QString("剩余时间:%1s").arg(restTime));
     update();
+    if(restTime == 10)
+    {
+        timePlayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/time.wav"));
+        timePlayer->setLoopCount(2);
+        timePlayer->play();
+    }
+    if(restTime > 10 && timePlayer->isPlaying())
+        timePlayer->stop();
     if(restTime == 0 || (gameObjects.size() == 0 && restTime > 0))
     {
         restTime = -1;
         player->stop();
+        goalPlayer->stop();
+        hook->goldPlayer->stop();
+        hook->hookfailPlayer->stop();
+        hook->hookstartPlayer->stop();
+        hook->bagPlayer->stop();
+        hook->bombPlayer->stop();
+        hook->diamondPlayer->stop();
+        hook->pickstonePlayer->stop();
+        hook->pickbombPlayer->stop();
+        hook->stonePlayer->stop();
+        hook->strengthdownPlayer->stop();
+        hook->strengthupPlayer->stop();
+        hook->timeplusPlayer->stop();
         this->close();
         if(score < goalScore)
         {
@@ -397,22 +419,6 @@ void Level::updateTimer()
         hook = NULL;
     }
 }
-
-//void Level::BGM(QString str,bool play){
-//    // 添加BGM
-//    QSoundEffect *sound = new QSoundEffect(this);//创建对象
-//    sound->setSource(QUrl::fromLocalFile(str));//添加资源
-//    sound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
-//    sound->setVolume(0.50f);
-//    if (play){
-//        sound->play();
-//    }
-//    else{
-//        sound->stop();
-//    }
-
-//}
-
 
 Level::~Level()
 {

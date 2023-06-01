@@ -28,7 +28,6 @@ Shop::Shop(int coin_,QWidget *parent,int levelNum_) :
     shop_bgm_player = new QSoundEffect(this);
     shop_bgm_player->setSource(QUrl::fromLocalFile("../goldMiner/Music/shop_bgm.wav"));
     shop_bgm_player->setLoopCount(QSoundEffect::Infinite);
-    shop_bgm_player->setVolume(1);
     shop_bgm_player->play();
 
     Dave_player = new QSoundEffect(this);
