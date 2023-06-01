@@ -35,6 +35,7 @@ Level::Level(QWidget *parent, int levelNum_) :
     player->setLoopCount(QSoundEffect::Infinite);
     player->stop();
     timePlayer = new QSoundEffect();
+    goalPlayer = new QSoundEffect();
     //player->setVolume(0.4);
 
     if (levelNum == 1)
@@ -341,7 +342,6 @@ void Level::paintEvent(QPaintEvent* event)
 void Level::updateTimer()
 {
     if (score >= goalScore && goal_play_once){
-        goalPlayer = new QSoundEffect();
         goalPlayer->setSource(QUrl::fromLocalFile("../goldMiner/Music/起飞.wav"));
         goalPlayer->setLoopCount(1);
         goalPlayer->play();
@@ -399,13 +399,12 @@ void Level::updateTimer()
         hook->strengthdownPlayer->stop();
         hook->strengthupPlayer->stop();
         hook->timeplusPlayer->stop();
-        this->close();
         if(score < goalScore)
         {
             player->setSource(QUrl::fromLocalFile("../goldMiner/Music/lose.wav"));
             player->setLoopCount(1);
             player->play();
-            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,false);
+            EndGameDialog *endGameDialog = new EndGameDialog(0, levelNum, false);
             endGameDialog->show();
         }
         else
@@ -413,10 +412,11 @@ void Level::updateTimer()
             player->setSource(QUrl::fromLocalFile("../goldMiner/Music/win.wav"));
             player->setLoopCount(1);
             player->play();
-            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore,levelNum,true);
+            EndGameDialog *endGameDialog = new EndGameDialog(score - goalScore, levelNum,true);
             endGameDialog->show();
         }
         hook = NULL;
+        this->close();
     }
 }
 
